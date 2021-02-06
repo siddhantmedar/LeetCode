@@ -1,3 +1,4 @@
+[Discussion Post (created on 6/1/2021 at 16:32)](https://leetcode.com/problems/binary-tree-preorder-traversal/discuss/1052133/C%2B%2B-Recursive-Solution)  
 <h2>144. Binary Tree Preorder Traversal</h2><h3>Medium</h3><hr><div><p>Given the <code>root</code> of a binary tree, return <em>the preorder traversal of its nodes' values</em>.</p>
 
 <p>&nbsp;</p>
