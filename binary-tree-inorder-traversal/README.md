@@ -1,3 +1,4 @@
+[Discussion Post (created on 6/1/2021 at 16:56)](https://leetcode.com/problems/binary-tree-inorder-traversal/solution/)  
 <h2>94. Binary Tree Inorder Traversal</h2><h3>Medium</h3><hr><div><p>Given the <code>root</code> of a binary tree, return <em>the inorder traversal of its nodes' values</em>.</p>
 
 <p>&nbsp;</p>
