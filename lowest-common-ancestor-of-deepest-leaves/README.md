@@ -1,3 +1,4 @@
+[Discussion Post (created on 15/1/2021 at 12:28)](https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/discuss/1066394/C%2B%2B-Simple-Solution)  
 <h2>1123. Lowest Common Ancestor of Deepest Leaves</h2><h3>Medium</h3><hr><div><p>Given the <code>root</code> of a&nbsp;binary tree, return <em>the lowest common ancestor of its deepest leaves</em>.</p>
 
 <p>Recall that:</p>
