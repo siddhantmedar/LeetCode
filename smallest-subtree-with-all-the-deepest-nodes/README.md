@@ -1,3 +1,4 @@
+[Discussion Post (created on 15/1/2021 at 12:26)](https://leetcode.com/problems/smallest-subtree-with-all-the-deepest-nodes/discuss/1066392/C%2B%2B-Simple-Solution)  
 <h2>865. Smallest Subtree with all the Deepest Nodes</h2><h3>Medium</h3><hr><div><p>Given the <code>root</code> of a binary tree, the depth of each node is <strong>the shortest distance to the root</strong>.</p>
 
 <p>Return <em>the smallest subtree</em> such that it contains <strong>all the deepest nodes</strong> in the original tree.</p>
