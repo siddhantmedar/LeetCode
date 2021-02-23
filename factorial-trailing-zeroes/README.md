@@ -1,3 +1,4 @@
+[Discussion Post (created on 23/1/2021 at 17:13)](https://leetcode.com/problems/factorial-trailing-zeroes/discuss/1079249/Simple-C%2B%2B-Code)  
 <h2>172. Factorial Trailing Zeroes</h2><h3>Easy</h3><hr><div><p>Given an integer <code>n</code>, return <em>the number of trailing zeroes in <code>n!</code></em>.</p>
 
 <p><b>Follow up: </b>Could you write a&nbsp;solution that works in logarithmic time complexity?</p>
