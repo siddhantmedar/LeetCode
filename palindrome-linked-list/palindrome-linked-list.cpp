@@ -11,14 +11,11 @@
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
-        if(!head || head->next == NULL) return true;
-        vector<int> v;
+        vector<int> res;
         while(head){
-            v.push_back(head->val);
-            head = head->next;
+            res.emplace_back(head->val);
+            head=head->next;
         }
-        vector<int> reverseList = v;
-        reverse(begin(reverseList), end(reverseList));       
-        return v==reverseList?true:false;
+        return res == vector<int>{rbegin(res), rend(res)};
     }
 };
