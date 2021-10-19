@@ -7,8 +7,10 @@ public:
             if(it != m.end()){
                 return vector<int>{it->second, i};
             }
-            else m[nums[i]] = i;
+            else{
+                m[nums[i]] = i;
+            }
         }
-        return vector<int>{};
+        return vector<int> {};
     }
 };
