@@ -1,3 +1,4 @@
+[Discussion Post (created on 1/11/2021 at 17:28)](https://leetcode.com/problems/find-the-town-judge/discuss/1606854/Easy-solution-oror-Python-3)  
 <h2>997. Find the Town Judge</h2><h3>Easy</h3><hr><div><p>In a town, there are <code>N</code> people labelled from&nbsp;<code>1</code> to <code>N</code>.&nbsp; There is a rumor that one of these people is secretly the town judge.</p>
 
 <p>If the&nbsp;town judge exists, then:</p>
