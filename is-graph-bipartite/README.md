@@ -1,3 +1,4 @@
+[Discussion Post (created on 1/11/2021 at 22:47)](https://leetcode.com/problems/is-graph-bipartite/discuss/1607218/Super-simple-solution-oror-Python-3)  
 <h2>785. Is Graph Bipartite?</h2><h3>Medium</h3><hr><div><p>There is an <strong>undirected</strong> graph with <code>n</code> nodes, where each node is numbered between <code>0</code> and <code>n - 1</code>. You are given a 2D array <code>graph</code>, where <code>graph[u]</code> is an array of nodes that node <code>u</code> is adjacent to. More formally, for each <code>v</code> in <code>graph[u]</code>, there is an undirected edge between node <code>u</code> and node <code>v</code>. The graph has the following properties:</p>
 
 <ul>
