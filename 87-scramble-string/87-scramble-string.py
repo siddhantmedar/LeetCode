@@ -12,7 +12,6 @@ class Solution:
 
             key = x + y
             if key in dp:
-                print("used dp")
                 return dp[key]
 
             for i in range(1, len(x)):
