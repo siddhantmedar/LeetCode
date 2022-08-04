@@ -1,20 +1,22 @@
 class Solution:
     def getRow(self, n: int) -> List[int]:
-        dp = [[0]*i for i in range(1, n+2)]
+        dp = [0]*(n+1)
+        dp[0] = 1
         
-        for i in range(len(dp)):
-            for j in range(len(dp[i])):
-                if i==0 and j==0:
-                    dp[i][j] = 1
-                    
-                elif i==0 or j==0:
-                    dp[i][j] = dp[i-1][j]
+        for i in range(1, len(dp)):
+            nxt = [0]*(n+1)
+            
+            for j in range(len(dp)):
+                if j==0:
+                    nxt[j] = dp[j]
                     
                 else:
-                    first = dp[i-1][j-1] if j-1 < len(dp[i-1]) else 0
-                    second = dp[i-1][j] if j < len(dp[i-1]) else 0
+                    first = dp[j-1]
+                    second = dp[j]
                     
-                    dp[i][j] = first+second
+                    nxt[j] = first+second
+            
+            dp = nxt
                     
-        return dp[-1]
+        return dp
         
