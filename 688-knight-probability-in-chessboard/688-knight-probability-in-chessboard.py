@@ -1,8 +1,5 @@
 class Solution:
     def knightProbability(self, N: int, k: int, r: int, c: int) -> float:
-        def isValid(i,j):
-            return 0<=i<N and 0<=j<N
-
         directions = [(-2,-1),(-2,1),(-1,-2),(-1,2),(1,-2),(1,2),(2,-1),(2,1)]
 
         curr = [[0 for _ in range(N)] for _ in range(N)]
@@ -21,7 +18,7 @@ class Solution:
                             x+=i
                             y+=j
 
-                            if isValid(x,y):
+                            if 0<=x<N and 0<=y<N:
                                 next[x][y] += curr[i][j]/8
                                 
             curr = next
