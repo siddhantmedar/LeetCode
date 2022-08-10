@@ -44,4 +44,5 @@ class Solution:
         for i in range(len(graph)):
             mp[i].extend(graph[i])
             
-        return DFS()
+        # return DFS()
+        return BFS()
