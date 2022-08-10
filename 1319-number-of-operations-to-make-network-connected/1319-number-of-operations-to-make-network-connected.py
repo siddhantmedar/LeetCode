@@ -21,8 +21,4 @@ class Solution:
         for u,v in edges:
             union(u,v)
             
-        for i in range(n):
-            find(i)
-            
-        print(parent)
-        return len(set([v for _,v in parent.items()]))-1
+        return sum([1 for k,v in parent.items() if k == v])-1
