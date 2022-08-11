@@ -4,23 +4,18 @@
 
 class Solution:
     def findCelebrity(self, n: int) -> int:
+        def knowsMemo(i,j):
+            if (i,j) in dp:
+                return dp[(i,j)]
+            
+            dp[(i,j)] = knows(i,j)
+            
+            return dp[(i,j)]
+        
         def confirm(i):
             for j in range(n):
                 if j!=i:
-                    if (i,j) in dp:
-                        knows_else =  dp[(i,j)]
-                    else:
-                        knows_else = knows(i,j)
-                        dp[(i,j)] = knows_else
-                        
-                    if (j,i) in dp:
-                        known = dp[(j,i)]
-                        
-                    else:
-                        known = knows(j,i)
-                        dp[(j,i)] = known
-                    
-                    if knows_else or not known:
+                    if knowsMemo(i,j) or not knowsMemo(j,i):
                         return False
             
             return True
@@ -29,11 +24,9 @@ class Solution:
         cand = 0
         
         for i in range(1,n):
-            result = knows(cand,i)
-            if result:
+            if knowsMemo(cand,i):
                 cand = i
-            dp[(cand, i)] = result
-            
+                
         return cand if confirm(cand) else -1       
             
         
