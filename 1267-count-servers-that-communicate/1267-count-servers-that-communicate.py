@@ -3,25 +3,17 @@ class Solution:
         m,n = len(grid), len(grid[0])
         count = 0
         
+        row, col = [0]*m, [0]*n
+        
         for i in range(m):
             for j in range(n):
                 if grid[i][j] == 1:
-                    found = False
+                    row[i]+=1
+                    col[j]+=1
                     
-                    for y in range(n):
-                        if y != j and grid[i][y] == 1:
-                            found = True
-                            break
-                    
-                    if found: count+=1
+        for i in range(m):
+            for j in range(n):
+                    if grid[i][j] == 1 and (row[i] > 1 or col[j] > 1):
+                        count+=1
                         
-                    if not found:
-                        for x in range(m):
-                            if x!=i and grid[x][j] == 1:
-                                found = True
-                                break
-                                
-                        if found:
-                            count+=1
-                            
         return count
