@@ -3,13 +3,9 @@ class Solution:
         """
         Do not return anything, modify s in-place instead.
         """
-        tmp = list(s)
-        
         start, end = 0, len(s)-1
         
         while start <= end:
-            tmp[start], tmp[end] = tmp[end], tmp[start]
+            s[start], s[end] = s[end], s[start]
             start+=1
             end-=1
-            
-        s[::] = "".join(tmp)
