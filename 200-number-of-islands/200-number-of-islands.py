@@ -22,8 +22,10 @@ class Solution:
                     if grid[i][j] == "1":
                         dfs(i,j)
                         count+=1
+                        
+            return count
         
-        # return DFS()
+        return DFS()
     
         def BFS():
             m,n = len(grid), len(grid[0])
@@ -111,6 +113,6 @@ class Solution:
                     
             return count
             
-        return dsu()
+        # return dsu()
             
             
