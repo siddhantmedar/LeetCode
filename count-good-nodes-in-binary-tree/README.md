@@ -1,3 +1,4 @@
+[Discussion Post (created on 14/7/2022 at 1:47)](https://leetcode.com/problems/count-good-nodes-in-binary-tree/discuss/2423158/Simple-DFS-Solution)  
 <h2>1448. Count Good Nodes in Binary Tree</h2><h3>Medium</h3><hr><div><p>Given a binary tree <code>root</code>, a node <em>X</em> in the tree is named&nbsp;<strong>good</strong> if in the path from root to <em>X</em> there are no nodes with a value <em>greater than</em> X.</p>
 
 <p>Return the number of <strong>good</strong> nodes in the binary tree.</p>
