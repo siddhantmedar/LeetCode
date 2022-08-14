@@ -8,22 +8,24 @@ class Solution:
     def findLeaves(self, root: Optional[TreeNode]) -> List[List[int]]:
         def solve(root):
             if not root:
-                return root
+                return 0
             
-            if not root.left and not root.right:
-                tmp.append(root.val)
-                return None
-                    
-            root.left = solve(root.left)
-            root.right = solve(root.right)
+            left = solve(root.left)
+            right = solve(root.right)
             
-            return root
+            height = max(left, right)
+            
+            mp[height].append(root.val)
+            
+            return 1+height
         
+        mp = {i:[] for i in range(101)}
         res = []
         
-        while root:
-            tmp = []
-            root = solve(root)
-            res.append(tmp)
-            
+        solve(root)
+        
+        for _, v in mp.items():
+            if v:
+                res.append(v)
+        
         return res
