@@ -20,7 +20,7 @@ class Solution:
         if neg:
             res*=-1
         
-        if res >= 2147483648 or res <= -2147483648:
-            return 0
+        if -2**31<=res<=2**31-1:
+            return res
         
-        return res
+        return 0
