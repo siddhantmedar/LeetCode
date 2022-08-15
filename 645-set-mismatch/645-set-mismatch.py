@@ -1,19 +1,19 @@
 class Solution:
     def findErrorNums(self, nums: List[int]) -> List[int]:
-        mp = {}
-        st = set()
+        dup, missing = None, None
         
-        missing, dup = None, None
-        
-        for ele in nums:
-            mp[ele] = 1+mp.get(ele,0)
-            if mp[ele] > 1:
-                dup = ele
-            st.add(ele)
-        
-        for i in range(1, len(nums)+1):
-            if i not in st:
-                missing = i
+        for i in range(len(nums)):
+            idx = abs(nums[i])-1
+            
+            if nums[idx] < 0:
+                dup = abs(nums[i])
+                
+            else:
+                nums[idx] = -1*nums[idx]
+                
+        for i in range(len(nums)):
+            if nums[i] > 0:
+                missing = i+1
                 break
-        
+                
         return [dup, missing]
