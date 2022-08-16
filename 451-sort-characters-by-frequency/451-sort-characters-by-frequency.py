@@ -5,7 +5,7 @@ class Solution:
         for c in s:
             mp[c]+=1
             
-        bucket = [[] for i in range(1,500001)]
+        bucket = [[] for i in range(len(s)+1)]
         
         for k,v in mp.items():
             bucket[v].append(k)
