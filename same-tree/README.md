@@ -1,3 +1,4 @@
+[Discussion Post (created on 15/7/2022 at 21:26)](https://leetcode.com/problems/same-tree/discuss/2431731/DFS-and-BFS-Approach-oror-Python)  
 <h2>100. Same Tree</h2><h3>Easy</h3><hr><div><p>Given the roots of two binary trees <code>p</code> and <code>q</code>, write a function to check if they are the same or not.</p>
 
 <p>Two binary trees are considered the same if they are structurally identical, and the nodes have the same value.</p>
