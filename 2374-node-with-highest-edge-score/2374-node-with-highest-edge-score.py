@@ -6,22 +6,14 @@ class Solution:
         for u, v in enumerate(edges):
             mp[v].append(u)
             
-        mx = max([sum(v) for k,v in mp.items()])
+        mx = float("-inf")
         res = []
         
         for k,v in mp.items():
-            if sum(v) == mx:
+            if sum(v) > mx:
+                mx = sum(v)
+                res = [k]
+            elif sum(v) == mx:
                 res.append(k)
-        
-        print(mp)
-        
+                
         return min(res)
-        
-#         1,0,0,0,0,7,7,5
-#         0 1 2 3 4 5 6 7
-#         from idx to nums[idx]
-        
-#         0:1,2,3,4
-#         1:0
-#         7:5,6
-#         5:7
