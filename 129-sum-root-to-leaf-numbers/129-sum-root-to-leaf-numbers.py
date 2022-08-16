@@ -7,8 +7,6 @@
 class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
         def solve(root):
-            nonlocal res
-            
             if not root:
                 return
             
