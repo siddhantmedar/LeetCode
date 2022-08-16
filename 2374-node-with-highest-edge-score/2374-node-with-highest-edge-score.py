@@ -1,19 +1,19 @@
 class Solution:
     def edgeScore(self, edges: List[int]) -> int:
-        mp = {i:[] for i in range(len(edges))}
+        mp = {i:0 for i in range(len(edges))}
     
     
         for u, v in enumerate(edges):
-            mp[v].append(u)
+            mp[v]+=u
             
         mx = float("-inf")
         res = []
         
         for k,v in mp.items():
-            if sum(v) > mx:
-                mx = sum(v)
+            if v > mx:
+                mx = v
                 res = [k]
-            elif sum(v) == mx:
+            elif v == mx:
                 res.append(k)
                 
         return min(res)
