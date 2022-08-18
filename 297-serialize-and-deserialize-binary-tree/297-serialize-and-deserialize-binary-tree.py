@@ -27,8 +27,7 @@ class Codec:
             solve(root.right)
             
         solve(root)
-        print(s)
-        print(s[:-1])
+        
         return s[:-1]
             
     def deserialize(self, data):
@@ -40,19 +39,21 @@ class Codec:
         
         lst = deque(data.split(","))
         
-        def solve(lst):
+        def solve():
+            nonlocal lst
+            
             if lst[0] == "#":
                 lst.popleft()
                 return None
                 
             root = TreeNode(int(lst.popleft()))
             
-            root.left = solve(lst)
-            root.right = solve(lst)
+            root.left = solve()
+            root.right = solve()
             
             return root
         
-        return solve(lst)
+        return solve()
 
 # Your Codec object will be instantiated and called as such:
 # ser = Codec()
