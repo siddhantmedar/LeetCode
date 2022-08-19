@@ -6,17 +6,17 @@
 #         self.right = right
 class Solution:
     def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
-        def inorder(root):
-            return inorder(root.left)+[root.val]+inorder(root.right) if root else []
-        
-        nums = inorder(root)
+        def solve(root):
+            if not root:
+                return False
+            
+            if k-root.val in st:
+                return True
+            
+            st.add(root.val)
+            
+            return solve(root.left) or solve(root.right)
         
         st = set()
         
-        for i, ele in enumerate(nums):
-            if k-ele in st:
-                return True
-            
-            st.add(ele)
-            
-        return False
+        return solve(root)
