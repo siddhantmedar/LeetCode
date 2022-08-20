@@ -21,7 +21,7 @@ class Solution:
             else:
                 res = root
                 solve(root.left)
-                
+            
         solve(root)
         
         return res
