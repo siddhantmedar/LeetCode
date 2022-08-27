@@ -5,18 +5,10 @@
 #         self.next = None
 
 class Solution:
-    def getIntersectionNode(self, head1:ListNode, head2: ListNode) -> Optional[ListNode]:
-        st = set()
-        
-        while head1:
-            st.add(head1)
-            
-            head1 = head1.next
-            
-        while head2:
-            if head2 in st:
-                return head2
-            
-            head2 = head2.next
-        
-        return None
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+        cheadA, cheadB = headA, headB
+
+        while cheadA != cheadB:
+            cheadA = cheadA.next if cheadA else headB
+            cheadB = cheadB.next if cheadB else headA
+        return cheadA
