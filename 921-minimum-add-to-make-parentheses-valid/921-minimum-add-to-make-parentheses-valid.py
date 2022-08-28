@@ -1,16 +1,17 @@
 class Solution:
     def minAddToMakeValid(self, s: str) -> int:
-        st = []
+        balance = 0
+        ans = 0
         
         for c in s:
-            if not st or c == "(":
-                st.append(c)
+            if c == "(":
+                balance+=1
                 
-            else:
-                if st and st[-1] == "(":
-                    st.pop()
-                else:
-                    st.append(c)
-            
-        return len(st)
+            elif c == ")":
+                balance-=1
                 
+            if balance == -1:
+                ans+=1
+                balance = 0
+                
+        return balance+ans
