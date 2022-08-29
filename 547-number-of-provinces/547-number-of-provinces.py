@@ -3,6 +3,7 @@ class Solution:
         def find(x):
             if parent[x] != x:
                 parent[x] = find(parent[x])
+                
             return parent[x]
         
         def union(x,y):
@@ -12,12 +13,12 @@ class Solution:
             if setX != setY:
                 parent[setY] = setX
                 
-        m,n = len(nums), len(nums [0])
-        parent = {i:i for i in range(len(nums))}
+                
+        parent = {x:x for x in range(len(nums))}
         
-        for i in range(m):
-            for j in range(n):
-                if nums[i][j] == 1:
+        for i in range(len(nums)):
+            for j in range(len(nums[0])):
+                if nums[i][j]:
                     union(i,j)
-                    
-        return sum([1 for k,v in parent.items() if k == v])
+        
+        return sum([1 for k,v in parent.items() if k==v])
