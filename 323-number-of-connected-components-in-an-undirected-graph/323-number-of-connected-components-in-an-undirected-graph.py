@@ -1,24 +1,21 @@
 class Solution:
     def countComponents(self, n: int, edges: List[List[int]]) -> int:
-        def dfs(node):
-            visited.add(node)
-            
-            for nei in graph[node]:
-                if nei not in visited:
-                    dfs(nei)
+        def find(x):
+            if parent[x] != x:
+                parent[x] = find(parent[x])
+                
+            return parent[x]
         
-        graph = defaultdict(list)
+        def union(x,y):
+            setX = find(x)
+            setY = find(y)
+            
+            if setX != setY:
+                parent[setY] = setX
+        
+        parent = {x:x for x in range(n)}
         
         for u,v in edges:
-            graph[u].append(v)
-            graph[v].append(u)
+            union(u,v)
         
-        visited = set()
-        count = 0
-        
-        for i in range(n):
-            if i not in visited:
-                dfs(i)
-                count+=1
-        
-        return count
+        return sum([1 for k,v in parent.items() if k == v])
