@@ -5,28 +5,38 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    @lru_cache
     def rob(self, root: Optional[TreeNode]) -> int:
-        if not root:
-            return 0
+        @lru_cache
+        def solve(root):
+            if not root:
+                return 0
+
+            if not root.left and not root.right:
+                return root.val
+            
+            if root in dp:
+                return dp[root]
+            
+            inc = root.val
+
+            if root.left:
+                inc+=solve(root.left.left)+solve(root.left.right)
+
+            if root.right:
+                inc+=solve(root.right.left) + solve(root.right.right)
+
+            exc = 0
+
+            if root.left:
+                exc+=solve(root.left)
+
+            if root.right:
+                exc+=solve(root.right)
+            
+            dp[root] = max(inc, exc)
+            
+            return dp[root]
         
-        if not root.left and not root.right:
-            return root.val
-    
-        inc = root.val
+        dp = defaultdict()
         
-        if root.left:
-            inc+=self.rob(root.left.left)+self.rob(root.left.right)
-            
-        if root.right:
-            inc+=self.rob(root.right.left) + self.rob(root.right.right)
-            
-        exc = 0
-        
-        if root.left:
-            exc+=self.rob(root.left)
-            
-        if root.right:
-            exc+=self.rob(root.right)
-            
-        return max(inc, exc)
+        return solve(root)
