@@ -10,7 +10,6 @@ class Solution:
         
         dist[k] = 0
         
-        visited.add(k)
         q = [(0,k)]
         
         heapq.heapify(q)
@@ -18,12 +17,16 @@ class Solution:
         while q:
             cost, node = heapq.heappop(q)
             
+            if node in visited:
+                continue
+            
+            visited.add(node)    
+            
             for nei, edge_cost in graph[node]:
                 if dist[nei] > cost+edge_cost:
                     dist[nei] = cost+edge_cost
                     heapq.heappush(q,((dist[nei], nei)))
-                    visited.add(nei)
-
+        
         mx = max([v for _,v in dist.items()])
         
         return mx if mx != float("inf") else -1
