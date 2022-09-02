@@ -13,9 +13,13 @@ class Twitter:
         lst = []
         
         for id in self.followMap[userId]:
-            lst.extend(self.tweets[id])
+            if self.tweets[id]:
+                idx = len(self.tweets[id])-1
+                lst.append((self.tweets[id][idx][0], self.tweets[id][idx][1], idx-1, id))
         
-        lst.extend(self.tweets[userId])
+        if self.tweets[userId]:
+            idx = len(self.tweets[userId])-1
+            lst.append((self.tweets[userId][idx][0], self.tweets[userId][idx][1], idx-1, userId))
         
         heapq.heapify(lst)
         
@@ -23,9 +27,13 @@ class Twitter:
         res = []
         
         while lst and count < 10:
-            item = heapq.heappop(lst)
-            res.append(item[1])
+            timer, tweetId, nxtIdx, id = heapq.heappop(lst)
+            
+            res.append(tweetId)
             count+=1
+            
+            if nxtIdx >= 0:
+                heapq.heappush(lst,(self.tweets[id][nxtIdx][0], self.tweets[id][nxtIdx][1], nxtIdx-1, id))
         
         return res
     
