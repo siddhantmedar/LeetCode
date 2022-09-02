@@ -15,11 +15,13 @@ class Twitter:
         for id in self.followMap[userId]:
             if self.tweets[id]:
                 idx = len(self.tweets[id])-1
-                lst.append((self.tweets[id][idx][0], self.tweets[id][idx][1], idx-1, id))
+                lst.append((self.tweets[id][idx][0],\
+                            self.tweets[id][idx][1], idx-1, id))
         
         if self.tweets[userId]:
             idx = len(self.tweets[userId])-1
-            lst.append((self.tweets[userId][idx][0], self.tweets[userId][idx][1], idx-1, userId))
+            lst.append((self.tweets[userId][idx][0],\
+                        self.tweets[userId][idx][1], idx-1, userId))
         
         heapq.heapify(lst)
         
@@ -33,8 +35,8 @@ class Twitter:
             count+=1
             
             if nxtIdx >= 0:
-                heapq.heappush(lst,(self.tweets[id][nxtIdx][0], self.tweets[id][nxtIdx][1], nxtIdx-1, id))
-        
+                heapq.heappush(lst,(self.tweets[id][nxtIdx][0],\
+                                    self.tweets[id][nxtIdx][1], nxtIdx-1, id))
         return res
     
     def follow(self, followerId: int, followeeId: int) -> None:
