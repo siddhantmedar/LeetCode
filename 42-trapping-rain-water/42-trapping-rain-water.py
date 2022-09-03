@@ -1,22 +1,20 @@
 class Solution:
-    def trap(self, heights: List[int]) -> int:
-        start, end = 0, len(heights)-1
-        left, right = heights[0], heights[len(heights)-1]
+    def trap(self, nums: List[int]) -> int:
+        n = len(nums)
+        left, right = [0]*n, [0]*n
         
-        result = 0
+        left[0] = nums[0]
+        right[n-1] = nums[n-1]
         
-        while start < end:
-            if left <= right:
-                start+=1
-                
-                if left-heights[start] >=0:
-                    result+=(left-heights[start])
-                left = max(left, heights[start])
+        for i in range(1, n):
+            left[i] = max(left[i-1], nums[i])
+        
+        for i in range(n-2, -1, -1):
+            right[i] = max(right[i+1], nums[i])
             
-            else:
-                end-=1
-                if right-heights[end] >= 0:
-                    result+=(right-heights[end])
-                right = max(right, heights[end])
+        res = 0
+        
+        for i in range(n):
+            res+=min(left[i], right[i]) - nums[i]
             
-        return result
+        return res
