@@ -1,20 +1,31 @@
 class Solution:
     def trap(self, nums: List[int]) -> int:
         n = len(nums)
-        left, right = [0]*n, [0]*n
         
-        left[0] = nums[0]
-        right[n-1] = nums[n-1]
-        
-        for i in range(1, n):
-            left[i] = max(left[i-1], nums[i])
-        
-        for i in range(n-2, -1, -1):
-            right[i] = max(right[i+1], nums[i])
-            
         res = 0
         
-        for i in range(n):
-            res+=min(left[i], right[i]) - nums[i]
-            
+        left, right = 0, n-1
+        lmxi, rmxi = nums[0], nums[n-1]
+
+        while left < right:
+            if nums[left] <= nums[right]:
+                left+=1
+                
+                water = min(lmxi, rmxi) - nums[left]
+                
+                if water >= 0:
+                    res+=water
+                
+                lmxi = max(lmxi, nums[left])
+                    
+            else:
+                right-=1
+                
+                water = min(lmxi, rmxi) - nums[right]
+                
+                if water >= 0:
+                    res+=water
+                
+                rmxi = max(rmxi, nums[right])
+
         return res
