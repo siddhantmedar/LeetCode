@@ -1,26 +1,45 @@
 class Solution:
     def maximalRectangle(self, matrix: List[List[str]]) -> int:
         def solve(nums):
-            res = 0
             st = []
-            
-            for i in range(len(nums)+1):
-                while st and (i == len(nums) or nums[st[-1]] >= nums[i]):
-                    height = nums[st.pop()]
 
-                    if not st:
-                        width = i
+            leftSmaller = deque()
+            rightSmaller = deque()
 
-                    else:
-                        width = i-st[-1]-1
+            for i in range(len(nums)):
+                ele = nums[i]
 
-                    res = max(res, width*height)
-
+                while st and nums[st[-1]] >= ele:
+                    st.pop()
+                if not st:
+                    leftSmaller.append(0)
+                else:
+                    leftSmaller.append(st[-1] + 1)
                 st.append(i)
-                
+
+            st.clear()
+
+            for i in range(len(nums) - 1, -1, -1):
+                ele = nums[i]
+
+                while st and nums[st[-1]] >= ele:
+                    st.pop()
+
+                if not st:
+                    rightSmaller.appendleft(len(nums) - 1)
+                else:
+                    rightSmaller.appendleft(st[-1] - 1)
+                st.append(i)
+
+            res = 0
+
+            for i in range(len(nums)):
+                res = max(res, (rightSmaller[i] - leftSmaller[i] + 1) * nums[i])
+
             return res
-        
+
         result = 0
+        
         frame = [0 for _ in range(len(matrix[0]))]
         
         for i in range(len(matrix)):
