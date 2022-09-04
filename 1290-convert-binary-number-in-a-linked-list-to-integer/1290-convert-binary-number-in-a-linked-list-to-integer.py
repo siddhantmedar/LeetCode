@@ -5,23 +5,17 @@
 #         self.next = next
 class Solution:
     def getDecimalValue(self, head: ListNode) -> int:
-        def solve(head):
-            nonlocal p, res
-            
-            if not head:
-                return
-            
-            solve(head.next)
-            
-            res+=(head.val*(2**p))
-            p+=1
-            
-            
+        tmp = deque()
+        
+        while head:
+            tmp.appendleft(head.val)
+            head = head.next
             
         p = 0
         res = 0
         
-        solve(head)
+        for ele in tmp:
+            res+=ele*(2**p)
+            p+=1
         
         return res
-        
