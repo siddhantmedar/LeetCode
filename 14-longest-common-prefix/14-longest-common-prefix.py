@@ -34,13 +34,13 @@ class Solution:
         while len(node.children) == 1 and not node.isEnd:
             res+=node.c
             
-            c = None
+            ch = None
             
             for k,v in node.children.items():
                 if v:
-                    c = k
+                    ch = k
             
-            node = node.children[c]
+            node = node.children[ch]
         
         res+=node.c
         
