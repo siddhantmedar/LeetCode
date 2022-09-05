@@ -1,3 +1,4 @@
+[Discussion Post (created on 5/8/2022 at 11:41)](https://leetcode.com/problems/longest-common-prefix/discuss/2535652/Trie-Approach-oror-Python)  
 <h2>14. Longest Common Prefix</h2><h3>Easy</h3><hr><div><p>Write a function to find the longest common prefix string amongst an array of strings.</p>
 
 <p>If there is no common prefix, return an empty string <code>""</code>.</p>
