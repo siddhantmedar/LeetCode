@@ -32,16 +32,12 @@ class Solution:
         node = root
         
         while len(node.children) == 1 and not node.isEnd:
-            res+=node.c
-            
             ch = None
             
             for k,v in node.children.items():
-                if v:
-                    ch = k
+                res+=k
+                ch = k
             
             node = node.children[ch]
-        
-        res+=node.c
         
         return res
