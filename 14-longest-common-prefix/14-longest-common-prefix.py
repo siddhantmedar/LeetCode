@@ -2,7 +2,6 @@ class Trie:
     def __init__(self, c=""):
         self.children = {}
         self.isEnd = False
-        self.c = c
         
     @staticmethod
     def insertWords(strs):
