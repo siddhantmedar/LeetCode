@@ -1,24 +1,24 @@
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-        def isSorted(nums):
-            for i in range(len(nums)-1):
-                if nums[i] > nums[i+1]:
-                    return False
+#         def isSorted(nums):
+#             for i in range(len(nums)-1):
+#                 if nums[i] > nums[i+1]:
+#                     return False
                 
-            return True
+#             return True
             
-        def isReverseSorted(nums):
-            for i in range(len(nums)-1):
-                if nums[i] < nums[i+1]:
-                    return False
+#         def isReverseSorted(nums):
+#             for i in range(len(nums)-1):
+#                 if nums[i] < nums[i+1]:
+#                     return False
                 
-            return True
+#             return True
         
-        if isSorted(nums):
-            return nums[0]
+#         if isSorted(nums):
+#             return nums[0]
         
-        if isReverseSorted(nums):
-            return nums[len(nums)-1]
+#         if isReverseSorted(nums):
+#             return nums[len(nums)-1]
         
         start, end = 0, len(nums)-1
         
