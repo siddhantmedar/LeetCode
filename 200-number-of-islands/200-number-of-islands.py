@@ -1,17 +1,22 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        def dfs(i,j):
-            if i < 0 or i >= M or j < 0 or j >= N or grid[i][j] == "0" or (i,j) in visited:
-                return
+        def bfs(i,j):
+            q = deque([(i,j)])
+            visited.add((i,j))
             
-            visited.add((i, j))
-            
-            for dx, dy in directions:
-                dx+=i
-                dy+=j
+            while q:
+                i,j = q.popleft()
                 
-                dfs(dx, dy)
-                
+                for dx, dy in directions:
+                    dx+=i
+                    dy+=j
+
+                    if dx < 0 or dx >= M or dy < 0 or dy >= N or grid[dx][dy] == "0"\
+                    or (dx,dy) in visited:
+                        continue
+                    
+                    visited.add((dx, dy))
+                    q.append((dx, dy))
         
         M,N = len(grid), len(grid[0])
         directions = [(-1,0), (1,0), (0,-1), (0,1)]
@@ -22,7 +27,7 @@ class Solution:
         for i in range(M):
             for j in range(N):
                 if (i,j) not in visited and grid[i][j] == "1":
-                    dfs(i,j)
+                    bfs(i,j)
                     count+=1
         
         return count
