@@ -1,33 +1,39 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        def bfs(i,j):
-            q = deque([(i,j)])
-            visited.add((i,j))
+        def find(x,y):
+            if parent[(x,y)] != (x,y):
+                parent[(x,y)] = find(parent[(x,y)][0], parent[(x,y)][1])
             
-            while q:
-                i,j = q.popleft()
-                
-                for dx, dy in directions:
-                    dx+=i
-                    dy+=j
-
-                    if dx < 0 or dx >= M or dy < 0 or dy >= N or grid[dx][dy] == "0"\
-                    or (dx,dy) in visited:
-                        continue
-                    
-                    visited.add((dx, dy))
-                    q.append((dx, dy))
+            return parent[(x,y)]
+        
+        def union(i,j,x,y):
+            setX = find(i,j)
+            setY = find(x,y)
+            
+            if setX != setY:
+                if size[(i,j)] >= size[(x,y)]:
+                    parent[setY] = setX
+                    size[setX]+=size[setY]
+                else:
+                    parent[setX] = setY
+                    size[setY]+=size[setX]
         
         M,N = len(grid), len(grid[0])
         directions = [(-1,0), (1,0), (0,-1), (0,1)]
-        visited = set()
         
-        count = 0
+        parent = {(i,j):(i,j) for i in range(M) for j in range(N) if grid[i][j] == "1"}
+        size = {(i,j):1 for i in range(M) for j in range(N) if grid[i][j] == "1"}
         
         for i in range(M):
             for j in range(N):
-                if (i,j) not in visited and grid[i][j] == "1":
-                    bfs(i,j)
-                    count+=1
+                if grid[i][j] == "1":
+                    for dx, dy in directions:
+                        dx+=i
+                        dy+=j
+                        if 0<=dx<M and 0<=dy<N and grid[dx][dy] == "1":
+                            union(i,j,dx,dy)
         
-        return count
+        print(parent)
+        print(size)
+        return sum([1 for k,v in parent.items() if k == v])
+        
