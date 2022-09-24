@@ -1,11 +1,19 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        container = [0]*26
+        mp = defaultdict()
         
         for c in s:
-            container[ord(c)-ord('a')]+=1
-            
+            mp[c] = 1+mp.get(c, 0)
+        
         for c in t:
-            container[ord(c)-ord('a')]-=1
+            if c not in mp:
+                return False
             
-        return all([x == 0 for x in container])
+            else:
+                mp[c]-=1
+                
+        for k,v in mp.items():
+            if v != 0:
+                return False
+            
+        return True
