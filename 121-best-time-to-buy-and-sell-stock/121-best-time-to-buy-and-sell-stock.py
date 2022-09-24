@@ -10,4 +10,3 @@ class Solution:
                 stock = min(stock, prices[i])
                 
         return profit
-        
