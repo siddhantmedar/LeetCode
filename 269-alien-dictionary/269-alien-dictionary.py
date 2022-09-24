@@ -41,5 +41,5 @@ class Solution:
                     break
         
         result = toposort()
-        print(graph)
+
         return "".join(result)
