@@ -1,28 +1,37 @@
 class Solution:
     def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        def find(x):
-            if parent[x] != x:
-                parent[x] = find(parent[x])
-                
-            return parent[x]
+        # two conditions:
+        #     no cycle
+        #     e = v-1
         
-        def union(x,y):
-            setX = find(x)
-            setY = find(y)
+        def dfs(node, parent=None):
+            visited.add(node)
             
-            if setX != setY:
-                parent[setY] = setX
-                return True
-            else:
-                return False
+            for nei in graph[node]:
+                if nei not in visited:
+                    if not dfs(nei, node):
+                        return False
+                    
+                elif nei in visited and nei != parent:
+                    return False
+                
+            return True
             
-        parent = {i:i for i in range(n)}
+        if len(edges) != n-1:
+            return False
+        
+        graph = defaultdict(set)
         
         for u,v in edges:
-            if not union(u,v):
-                return False
-    
-        for i in range(n):
-            find(i)
+            graph[u].add(v)
+            graph[v].add(u)
         
-        return True if len(edges) == n-1 and len(set([v for k,v in parent.items()])) == 1 else False
+        visited = set()
+        
+        for i in range(n):
+            if i not in visited:
+                if not dfs(i):
+                    return False
+                
+        return True
+        
