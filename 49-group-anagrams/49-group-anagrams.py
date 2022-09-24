@@ -2,14 +2,19 @@ class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
         mp = defaultdict(list)
         
-        for word in  strs:
-            container = [0]*26
+        for word in strs:
+            box = [0]*26
             
             for c in word:
-                idx = ord(c)-ord('a')
-                container[idx]+=1
+                box[ord(c)-ord('a')]+=1
             
-            mp[tuple(container)].append(word)
+            mp[tuple(box)].append(word)
         
-        return [v for _, v in mp.items()]
-                
+        result = []
+        
+        for k,v in mp.items():
+            result.append(v)
+            
+        return result
+            
+        
