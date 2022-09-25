@@ -15,24 +15,6 @@ class Solution:
             dfs(root.left)
             dfs(root.right)
             
-        def bfs(root):
-            if not root:
-                return 
-            
-            q = deque([root])
-            
-            while q:
-                node = q.popleft()
-                
-                node.left, node.right = node.right, node.left
-                
-                if node.left:
-                    q.append(node.left)
-                    
-                if node.right:
-                    q.append(node.right)
-        
-        bfs(root)
+        dfs(root)
         
         return root
-        
