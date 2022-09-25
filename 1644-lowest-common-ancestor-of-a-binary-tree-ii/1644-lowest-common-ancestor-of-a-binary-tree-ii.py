@@ -16,24 +16,23 @@ class Solution:
             
             return exists(root.left, target) or exists(root.right, target)
         
-        def solve(root, p, q):
+        if not exists(root,p) or not exists(root, q):
+            return None
+        
+        def dfs(root):
             if not root:
                 return root
             
             if root == p or root == q:
                 return root
-
-            left = solve(root.left,p,q)
-            right = solve(root.right,p,q)
-
+            
+            left = dfs(root.left)
+            right = dfs(root.right)
+            
             if left and right:
                 return root
             
-            if left or right:
-                return left if left else right
-            
-        if exists(root, p) and exists(root, q):
-            return solve(root, p, q)
-
-        else:
-            return None
+            return left or right
+        
+        return dfs(root)
+        
