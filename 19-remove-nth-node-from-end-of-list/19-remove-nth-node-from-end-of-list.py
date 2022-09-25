@@ -4,29 +4,20 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def removeNthFromEnd(self, head: Optional[ListNode], K: int) -> Optional[ListNode]:
-        # N-K+1 from the front
-        N = 0
-        tmp = head
-        
-        while tmp:
-            N+=1
-            
-            tmp = tmp.next
-            
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
         dummy = ListNode(-1)
         dummy.next = head
         
-        pre, curr = dummy, dummy.next
+        first, second = dummy, dummy
         
-        count = N-K+1
+        while n:
+            first = first.next
+            n-=1
         
-        while count != 1:
-            pre = pre.next
-            curr = curr.next
-            
-            count-=1
+        while first.next:
+            first = first.next
+            second = second.next
         
-        pre.next = curr.next if curr else None
+        second.next = second.next.next
         
         return dummy.next
