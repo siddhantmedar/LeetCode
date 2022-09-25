@@ -7,36 +7,19 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        def dfs(root, target, path):
+        def dfs(root):
             if not root:
-                return False
+                return
             
-            mp[root.val] = root
+            if root == p or root == q:
+                return root
             
-            path.append(root.val)
+            left = dfs(root.left)
+            right = dfs(root.right)
             
-            if root.val == target.val:
-                return True
+            if left and right:
+                return root
             
-            if dfs(root.left, target, path) or dfs(root.right, target, path):
-                return True
-                
-            path.remove(root.val)
-            
-            return False
-            
-        p1, p2 = [], []
-        mp = defaultdict()
+            return left or right
         
-        dfs(root, p, p1)
-        dfs(root, q, p2)
-        
-        p2 = set(p2)
-        
-        result = None
-        
-        for node in p1:
-            if node in p2:
-                result = node
-                
-        return mp[result]
+        return dfs(root)
