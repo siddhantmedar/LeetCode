@@ -9,11 +9,13 @@ class Solution:
         def solve(root, mn, mx):
             if not root:
                 return True
-            
-            if not mn<root.val<mx:
+        
+            if not mn < root.val < mx:
                 return False
             
-            return solve(root.left, mn, root.val) and solve(root.right, root.val, mx)
-        
+            return solve(root.left, mn, root.val) and \
+            solve(root.right, root.val, mx)
         
         return solve(root, float("-inf"), float("inf"))
+        
+        
