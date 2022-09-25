@@ -9,7 +9,7 @@ class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         def dfs(root):
             if not root:
-                return
+                return root
             
             if root == p or root == q:
                 return root
