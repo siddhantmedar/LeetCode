@@ -5,33 +5,26 @@
 #         self.next = next
 
 class Pair:
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
-
+    def __init__(self, val, lst):
+        self.val = val
+        self.lst = lst
+        
     def __lt__(self, other):
-        if self.a < other.a:
+        if self.val < other.val or self.lst.val < other.lst.val:
             return True
-        elif self.a > other.a:
+        else:
             return False
-        elif self.b.val < other.b.val:
-            return True
-        elif self.b.val > other.b.val:
-            return False
-
     def __eq__(self, other):
-        return self.a == other.a and self.b.val == other.b.val
-
+        if self.val == other.val and self.lst.val == other.lst.val:
+            return True
+        else:
+            return False
     def __gt__(self, other):
-        if self.a > other.a:
+        if self.val > other.val or self.lst.val > other.lst.val:
             return True
-        elif self.a < other.a:
+        else:
             return False
-        elif self.b.val > other.b.val:
-            return True
-        elif self.b.val < other.b.val:
-            return False
-
+        
 class Solution:    
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         heap = []
@@ -48,7 +41,7 @@ class Solution:
         while heap:
             p = heapq.heappop(heap)
             
-            val, node = p.a, p.b
+            val, node = p.val, p.lst
             
             tmp.next = ListNode(val)
             tmp = tmp.next
