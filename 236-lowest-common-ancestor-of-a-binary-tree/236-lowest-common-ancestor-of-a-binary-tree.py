@@ -7,42 +7,36 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        def getPath(root, target, path):
-            nonlocal found
-            
+        def dfs(root, target, path):
             if not root:
-                return
+                return False
             
-            path.append(root)
+            mp[root.val] = root
             
-            if root == target:
-                found = True
-                return
+            path.append(root.val)
             
-            getPath(root.left, target, path)
+            if root.val == target.val:
+                return True
             
-            if found:
-                return
+            if dfs(root.left, target, path) or dfs(root.right, target, path):
+                return True
+                
+            path.remove(root.val)
             
-            getPath(root.right, target, path)
+            return False
             
-            if found:
-                return
-            
-            path.pop()
-            
-        path1, path2 = [], []
+        p1, p2 = [], []
+        mp = defaultdict()
         
-        found = False
-        getPath(root, p, path1)
+        dfs(root, p, p1)
+        dfs(root, q, p2)
         
-        found = False
-        getPath(root, q, path2)
+        p2 = set(p2)
         
         result = None
         
-        for i in range(min(len(path1), len(path2))):
-            if path1[i] == path2[i]:
-                result = path1[i]
+        for node in p1:
+            if node in p2:
+                result = node
                 
-        return result
+        return mp[result]
