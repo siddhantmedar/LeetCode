@@ -5,25 +5,21 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def isSubtree(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
-        def isSame(root1, root2):
-            if not root1 and not root2:
+    def isSubtree(self, root: Optional[TreeNode], subRoot: Optional[TreeNode]) -> bool:
+        def same(p,q):
+            if not p and not q:
                 return True
             
-            elif (not root1 and root2) or (not root2 and root1):
+            if (not p and q) or (p and not q):
                 return False
             
-            return root1.val == root2.val and isSame(root1.left, root2.left) and isSame(root1.right, root2.right)
-            
+            return p.val==q.val and same(p.left, q.left) and same(p.right,q.right)
+        
         def dfs(root):
             if not root:
                 return
             
-            if isSame(root, root2):
-                return True
-            
-            return dfs(root.left) or dfs(root.right)
+            return same(root, subRoot) or dfs(root.left) or dfs(root.right)
         
-        return dfs(root1)
-    
+        return dfs(root)
         
