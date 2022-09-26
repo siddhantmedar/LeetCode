@@ -1,40 +1,41 @@
 class Solution:
     def exist(self, grid: List[List[str]], word: str) -> bool:
-        M,N = len(grid), len(grid[0])
-        directions = [(-1,0),(1,0),(0,-1),(0,1)]
+        # get starting points
+        
         q = deque()
+        
+        M,N = len(grid), len(grid[0])
         
         for i in range(M):
             for j in range(N):
                 if grid[i][j] == word[0]:
                     q.append((i,j))
-            
-        st = list()
+        
+        directions = [(-1,0),(1,0),(0,-1),(0,1)]
         visited = set()
-        while q:
-            i,j = q.popleft()
-            st.append((i,j,0, False))
-            
+        st = [(i,j, False, 0, grid[i][j]) for i,j in q]
+        
         while st:
-            i, j, idx, backtrack = st.pop()
+            i,j, backtrack, idx, w = st.pop()
+            visited.add((i,j))
             
             if backtrack:
                 visited.remove((i,j))
                 continue
                 
-            visited.add((i,j))
-            
-            st.append((i,j, idx, True))
-            
-            if idx == len(word)-1:
+            if w == word:
                 return True
             
-            for dx,dy in directions:
+            st.append((i,j, True, idx, w))
+            
+            if word[idx] != grid[i][j]:
+                continue
+                
+            for dx, dy in directions:
                 dx+=i
                 dy+=j
                 
-                if 0<=dx<M and 0<=dy<N and (dx,dy) not in visited\
-                and grid[dx][dy] == word[idx+1]:
-                    st.append((dx,dy, idx+1, False))
-        
+                if 0<=dx<M and 0<=dy<N and (dx, dy) not in visited:
+                    st.append((dx,dy,False, idx+1, w+grid[dx][dy]))
+                    
         return False
