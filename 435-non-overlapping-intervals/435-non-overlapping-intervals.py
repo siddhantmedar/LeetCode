@@ -1,18 +1,20 @@
 class Solution:
-    def eraseOverlapIntervals(self, intervals: List[List[int]]) -> int:
-        intervals.sort()
+    def eraseOverlapIntervals(self, nums: List[List[int]]) -> int:
+        nums.sort()
         
-        result = 0
+        print(nums)
         
-        end = intervals[0][1]
+        end = nums[0][1]
+        count = 0
         
-        for s,e in intervals[1:]:
-            if s>=end:
-                end = e
-                
+        for i in nums[1:]:
+            if i[0] < end:
+                count+=1
+                end = min(end, i[1])
             else:
-                result+=1
-                end = min(end, e)
+                end = i[1]
                 
-        return result
+        print(count)
         
+        return count
+    
