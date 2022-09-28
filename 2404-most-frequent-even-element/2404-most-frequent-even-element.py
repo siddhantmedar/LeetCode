@@ -6,13 +6,12 @@ class Solution:
             if not ele%2:
                 mp[ele] = 1+mp.get(ele, 0)
                 
-        mp = dict(sorted(mp.items(), key=lambda x:(-x[1], x[0])))
+        heap = [(-v,k) for k,v in mp.items() if not k%2]
         
-        print(mp)
-        
-        for k,v in mp.items():
-            if not k%2:
-                return k
+        if heap:
+            heapq.heapify(heap)
             
-        return -1
+            return heap[0][1]
         
+        else:
+            return -1
