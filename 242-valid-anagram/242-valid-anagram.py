@@ -11,9 +11,7 @@ class Solution:
             
             else:
                 mp[c]-=1
-                
-        for k,v in mp.items():
-            if v != 0:
-                return False
-            
-        return True
+                if mp[c] == 0:
+                    del mp[c]
+                    
+        return True if not mp else False
