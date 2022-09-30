@@ -6,27 +6,24 @@
 #         self.right = right
 class Solution:
     def averageOfLevels(self, root: Optional[TreeNode]) -> List[float]:
+        def dfs(root, level):
+            if not root:
+                return
+            
+            mp[level].append(root.val)
+            
+            dfs(root.left, level+1)
+            dfs(root.right, level+1)
+            
+        mp = defaultdict(list)
+        
+        dfs(root,1)
+        
+        print(mp)
+        
         result = []
         
-        q = deque([root])
+        for k,v in mp.items():
+            result.append(sum(v)/len(v))
         
-        while q:
-            n = len(q)
-            num = 0
-            den = 0
-            
-            for k in range(n):
-                node = q.popleft()
-                
-                num+=node.val
-                den+=1
-                
-                if node.left:
-                    q.append(node.left)
-                    
-                if node.right:
-                    q.append(node.right)
-                    
-            result.append(num/den)
-            
         return result
