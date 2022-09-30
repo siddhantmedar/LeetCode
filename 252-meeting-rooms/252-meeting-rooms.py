@@ -3,7 +3,9 @@ class Solution:
         nums.sort(key=lambda x:x[0])
         
         for i in range(len(nums)-1):
-            if nums[i][1] > nums[i+1][0]:
+            e1, e2 = nums[i], nums[i+1]
+            
+            if e1[1] > e2[0]:
                 return False
-        
+            
         return True
