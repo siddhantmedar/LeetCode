@@ -19,7 +19,7 @@ class Solution:
         
         dfs(root,1)
         
-        print(mp)
+        # print(mp)
         
         result = []
         
