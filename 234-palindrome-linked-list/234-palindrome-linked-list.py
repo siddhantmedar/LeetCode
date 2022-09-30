@@ -34,11 +34,21 @@ class Solution:
         
         ptr1, ptr2 = head, mid.next
         
+        result = None
+        
         while ptr1 and ptr2:
             if ptr1.val != ptr2.val:
-                return False
+                result = False
+                break
             
             ptr1 = ptr1.next
             ptr2 = ptr2.next
+        
+        if result == None:
+            result = True
             
-        return True
+        #undoing changes made to the input LL
+        rev = reverse(mid.next)
+        mid.next = rev
+        
+        return result
