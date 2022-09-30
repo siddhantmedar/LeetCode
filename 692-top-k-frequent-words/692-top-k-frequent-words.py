@@ -5,14 +5,11 @@ class Solution:
         for word in words:
             mp[word] = 1+mp.get(word, 0)
             
-        heap = [(-v,k) for k,v in mp.items()]
-        
-        heapq.heapify(heap)
+        tmp = sorted(mp.items(), key=lambda x:(-x[1],x[0]))
         
         result = []
         
-        while k:
-            result.append(heapq.heappop(heap)[1])
-            k-=1
+        for i in range(k):
+            result.append(tmp[i][0])
             
         return result
