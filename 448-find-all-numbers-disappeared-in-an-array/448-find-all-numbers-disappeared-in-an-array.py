@@ -2,19 +2,10 @@ class Solution:
     def findDisappearedNumbers(self, nums: List[int]) -> List[int]:
         result = []
         
-        for i, ele in enumerate(nums):
-            idx = abs(ele)-1
-            
-            if nums[idx] > 0:
-                nums[idx]*=-1
+        st = set(nums)
         
-        for i, ele in enumerate(nums):
-            if ele > 0:
-                result.append(i+1)
+        for i in range(1, len(nums)+1):
+            if i not in st:
+                result.append(i)
                 
-        for i, ele in enumerate(nums):
-            if ele < 0:
-                nums[i] = -1*ele
-        
         return result
-            
