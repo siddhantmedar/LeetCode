@@ -7,32 +7,36 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
-        def exists(root, target):
+        def exists(root, node):
             if not root:
                 return False
             
-            if root == target:
+            if root == node:
                 return True
             
-            return exists(root.left, target) or exists(root.right, target)
+            left = exists(root.left, node)
+            right = exists(root.right, node)
+            
+            return left or right
         
-        if not exists(root,p) or not exists(root, q):
-            return None
-        
-        def dfs(root):
+        def dfs(root, p, q):
             if not root:
-                return root
+                return
             
             if root == p or root == q:
                 return root
             
-            left = dfs(root.left)
-            right = dfs(root.right)
+            left = dfs(root.left, p, q)
+            right = dfs(root.right, p, q)
             
             if left and right:
                 return root
             
             return left or right
         
-        return dfs(root)
         
+        if not exists(root, p) or not exists(root, q):
+            return None
+        
+        
+        return dfs(root, p, q)
