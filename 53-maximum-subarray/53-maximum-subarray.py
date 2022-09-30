@@ -2,12 +2,12 @@ class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
         result = float("-inf")
         
-        mx = 0
+        curr = 0
         
-        for i in range(len(nums)):
-            mx = max(mx + nums[i], nums[i])
+        for ele in nums:
+            curr = max(curr+ele, ele)
             
-            result = max(mx, result)
+            result = max(result, curr)
             
         return result
         
