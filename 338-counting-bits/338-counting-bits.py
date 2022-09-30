@@ -4,14 +4,14 @@ class Solution:
             result = 0
             
             while n:
-                n = n&(n-1)
-                result+=1
+                result+=(n&1)
+                n>>=1
                 
             return result
         
         result = []
         
-        for i in range(n+1):
+        for i in range(0, n+1):
             result.append(count(i))
             
         return result
