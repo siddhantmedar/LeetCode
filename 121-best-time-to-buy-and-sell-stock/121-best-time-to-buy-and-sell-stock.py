@@ -4,11 +4,12 @@ class Solution:
         
         profit = 0
         
-        for ele in prices[1:]:
-            if ele >= stock:
-                profit = max(profit, ele-stock)
+        for price in prices[1:]:
+            if price >= stock:
+                profit = max(profit, price-stock)
                 
             else:
-                stock = min(stock, ele)
-                
+                if price < stock:
+                    stock = price
+                    
         return profit
