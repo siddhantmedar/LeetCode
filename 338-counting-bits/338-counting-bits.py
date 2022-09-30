@@ -4,9 +4,9 @@ class Solution:
             result = 0
             
             while n:
-                result+=(n&1)
-                n>>=1
-                
+                n=n&(n-1)
+                result+=1
+            
             return result
         
         result = []
