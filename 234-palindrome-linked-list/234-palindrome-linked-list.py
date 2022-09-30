@@ -5,23 +5,40 @@
 #         self.next = next
 class Solution:
     def isPalindrome(self, head: Optional[ListNode]) -> bool:
-        def isPalin():
-            start, end = 0, len(lst)-1
+        def middle(head):
+            slow = head
+            fast = head.next
             
-            while start < end:
-                if lst[start] != lst[end]:
-                    return False
+            while fast and fast.next:
+                slow = slow.next
+                fast = fast.next.next
                 
-                start+=1
-                end-=1
-                
-            return True
+            return slow
         
+        def reverse(head):
+            if not head or not head.next:
+                return head
+            
+            result = reverse(head.next)
+            
+            head.next.next = head
+            head.next = None
+            
+            return result
         
-        lst = []
+        mid = middle(head)
         
-        while head:
-            lst.append(head.val)
-            head = head.next
+        rev = reverse(mid.next)
         
-        return isPalin()
+        mid.next = rev
+        
+        ptr1, ptr2 = head, mid.next
+        
+        while ptr1 and ptr2:
+            if ptr1.val != ptr2.val:
+                return False
+            
+            ptr1 = ptr1.next
+            ptr2 = ptr2.next
+            
+        return True
