@@ -1,8 +1,10 @@
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        result = 0
+        mp = {}
         
         for ele in nums:
-            result^=ele
+            mp[ele]  = 1+mp.get(ele, 0)
             
-        return result
+        for k,v in mp.items():
+            if v == 1:
+                return k
