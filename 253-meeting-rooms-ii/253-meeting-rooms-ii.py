@@ -1,18 +1,18 @@
 class Solution:
     def minMeetingRooms(self, nums: List[List[int]]) -> int:
-        nums.sort()
+        nums.sort(key = lambda x:x[0])
         
         heap = []
         
-        for i in nums:
+        for start, end in nums:
             if not heap:
-                heapq.heappush(heap, i[1])
+                heapq.heappush(heap, end)
                 
             else:
-                if heap[0] <= i[0]:
-                    heapq.heappushpop(heap,i[1])
-                    
+                if heap[0] <= start:
+                    heapq.heappushpop(heap, end)
+                
                 else:
-                    heapq.heappush(heap, i[1])
+                    heapq.heappush(heap, end)
         
         return len(heap)
