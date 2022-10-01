@@ -8,60 +8,27 @@ class Node:
 
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
-        def DFS():
-            def dfs(node):
-                if node:
-                    visited.add(node)
-
-                    if node not in clone:
-                        clone[node] = Node(node.val)
-
-                    for nei in node.neighbors:
-                        if nei not in clone:
-                            clone[nei] = Node(nei.val)
-
-                        clone[node].neighbors.append(clone[nei])
-
-                    for nei in node.neighbors:
-                        if nei not in visited:
-                            dfs(nei)
-
+        def dfs(node):
             if not node:
-                return node
-
-            clone = {}
-            visited = set()
-
-            dfs(node)
-
-            return clone[node]
-    
-        def BFS(src):
-            if not src:
-                return src
-
-            clone = {}
-            visited = set()
-
-            clone[src] = Node(src.val)
-            visited.add(src)
+                return
             
-            q = deque([src])
+            visited.add(node)
             
-            while q:
-                node = q.popleft()
+            if node not in mp:
+                mp[node] = Node(node.val)
                 
-                for nei in node.neighbors:
-                    clone[nei] = clone.get(nei, Node(nei.val))
-                    
-                    clone[node].neighbors.append(clone[nei])
-                    
-                for nei in node.neighbors:
-                    if nei not in visited:
-                        visited.add(nei)
-                        q.append(nei)
-
-            return clone[src]
+            for nei in node.neighbors:
+                if nei not in mp:
+                    mp[nei] = Node(nei.val)
+                
+                mp[node].neighbors.append(mp[nei])
+                
+                if nei not in visited:
+                    dfs(nei)
+            
+        mp = defaultdict()
+        visited = set()
         
-
-        return BFS(node)
+        dfs(node)
+        
+        return mp[node] if node in mp else None
