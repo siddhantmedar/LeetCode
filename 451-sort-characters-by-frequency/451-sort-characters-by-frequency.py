@@ -4,20 +4,21 @@ class Solution:
         
         for c in s:
             mp[c] = 1+mp.get(c,0)
-            
-        mp = dict(sorted(mp.items(), key=lambda x:-x[1]))
+        
+        heap = [(-v,k) for k,v in mp.items()]
+        
+        heapq.heapify(heap)
         
         result = ""
         
-        for k,v in mp.items():
-            while v:
-                result+=k
-                v-=1
-                
+        while heap:
+            v,k = heapq.heappop(heap)
+            v*=-1
+            
+            result+=k*v
+        
         return result
     
     
         # bucket
-        # heap 
-        # sorting
-        
+        # heap    
