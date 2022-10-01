@@ -1,26 +1,22 @@
 class Solution:
-    def reverse(self, n: int) -> int:
-        def rev(n):
-            nonlocal res
+    def reverse(self, x: int) -> int:
+        def solve(n):
+            if n>0:
+                return str(n%10) + solve(n//10)
             
-            if n > 0:
-                res = res*10 + n%10
-                rev(n//10)
-                
+            return ""
         
-        res = 0
-        neg = False
-        
-        if n < 0:
-            n*=-1
-            neg = True    
-        
-        rev(n)
-        
-        if neg:
-            res*=-1
-        
-        if -2**31<=res<=2**31-1:
-            return res
-        
-        return 0
+        if x != 0:
+            neg = True if x < 0 else False
+
+            result = int(solve(abs(x)))
+
+            result = -1*result if neg else result
+
+            if -2**31 <= result <= 2**31-1:
+                return result
+
+            return 0
+            
+        else:
+            return 0
