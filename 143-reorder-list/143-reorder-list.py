@@ -79,7 +79,7 @@ class Solution:
         
         mid.next = None
         
-        right = reverse2(right)
+        right = reverse1(right)
         
         return merge(left, right)
         
