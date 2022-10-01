@@ -21,7 +21,7 @@ class Solution:
             if not r:
                 return l
             
-            dummy = ListNode(-1)
+            dummy = ListNode(-101)
             tmp = dummy
             
             while l and r:
@@ -29,7 +29,7 @@ class Solution:
                     tmp.next = l
                     tmp = tmp.next
                     l = l.next
-                    
+            
                 else:
                     tmp.next = r
                     tmp = tmp.next
@@ -52,14 +52,14 @@ class Solution:
                 return head
             
             mid = middle(head)
-            
-            l = head
-            r = mid.next
+        
+            p = head
+            q = mid.next
             
             mid.next = None
             
-            left = mergeSort(l)
-            right = mergeSort(r)
+            left = mergeSort(p)
+            right = mergeSort(q)
             
             result = merge(left, right)
             
