@@ -10,22 +10,25 @@ class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
         def bfs(src):
             if not src:
-                return
+                return 
             
-            mp = defaultdict()
             visited = set()
+            mp = {}
             
-            q = deque([src])
             mp[src] = Node(src.val)
             visited.add(src)
             
+            q = deque([src])
+            
             while q:
                 n = len(q)
+                
                 for k in range(n):
                     node = q.popleft()
-
+                    
                     for nei in node.neighbors:
                         mp[nei] = mp.get(nei, Node(nei.val))
+                        
                         mp[node].neighbors.append(mp[nei])
                         
                         if nei not in visited:
@@ -34,4 +37,6 @@ class Solution:
                             
             return mp[src]
         
+            
         return bfs(node)
+        
