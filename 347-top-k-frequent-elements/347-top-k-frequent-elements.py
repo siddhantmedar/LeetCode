@@ -5,16 +5,15 @@ class Solution:
         for ele in nums:
             mp[ele] = 1+mp.get(ele, 0)
             
-        mp = dict(sorted(mp.items(), key=lambda x:-x[1]))
+        heap = [(-v,k) for k,v in mp.items()]
+        
+        heapq.heapify(heap)
         
         result = []
         
-        for key,val in mp.items():
+        while k:
+            val, key = heapq.heappop(heap)
             result.append(key)
             k-=1
             
-            if k == 0:
-                break
-                
         return result
-        
