@@ -8,27 +8,30 @@ class Node:
 
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
-        def dfs(node):
-            if not node:
+        def bfs(src):
+            if not src:
                 return
             
-            visited.add(node)
+            mp = defaultdict()
+            visited = set()
             
-            if node not in mp:
-                mp[node] = Node(node.val)
-                
-            for nei in node.neighbors:
-                if nei not in mp:
-                    mp[nei] = Node(nei.val)
-                
-                mp[node].neighbors.append(mp[nei])
-                
-                if nei not in visited:
-                    dfs(nei)
+            q = deque([src])
+            mp[src] = Node(src.val)
+            visited.add(src)
             
-        mp = defaultdict()
-        visited = set()
+            while q:
+                n = len(q)
+                for k in range(n):
+                    node = q.popleft()
+
+                    for nei in node.neighbors:
+                        mp[nei] = mp.get(nei, Node(nei.val))
+                        mp[node].neighbors.append(mp[nei])
+                        
+                        if nei not in visited:
+                            visited.add(nei)
+                            q.append(nei)
+                            
+            return mp[src]
         
-        dfs(node)
-        
-        return mp[node] if node in mp else None
+        return bfs(node)
