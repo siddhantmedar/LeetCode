@@ -12,7 +12,6 @@ class Solution:
                 top, bottom = left, right
                 
                 tmp = matrix[top][left+i]
-                
                 matrix[top][left+i] = matrix[bottom-i][left]
                 matrix[bottom-i][left] = matrix[bottom][right-i]
                 matrix[bottom][right-i] = matrix[top+i][right]
