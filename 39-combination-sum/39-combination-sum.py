@@ -16,6 +16,7 @@ class Solution:
         result = []
         
         nums.sort()
+        
         solve(0, 0, [])
         
         return result
