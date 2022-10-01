@@ -1,29 +1,20 @@
 class Solution:
-    def topKFrequent(self, nums: List[int], K: int) -> List[int]:
-        box = [[] for _ in range(10001)]
-        
-        mp = dict()
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        mp = defaultdict()
         
         for ele in nums:
-            mp[ele] = 1 + mp.get(ele, 0)
-        
-        for k,v in mp.items():
-            box[v].append(k)
-        
-        # print([(i,b) for i,b in enumerate(box) if b])
+            mp[ele] = 1+mp.get(ele, 0)
+            
+        mp = dict(sorted(mp.items(), key=lambda x:-x[1]))
         
         result = []
         
-        for i in range(len(box)-1, -1, -1):
-            if box[i]:
-                for ele in box[i]:
-                    if K == 0:
-                        break
-                    print(K, ele)
-                    result.append(ele)
-                    K-=1
-                    
+        for key,val in mp.items():
+            result.append(key)
+            k-=1
             
-        print(result)
-        
+            if k == 0:
+                break
+                
         return result
+        
