@@ -5,20 +5,20 @@ class Solution:
         for c in s:
             mp[c] = 1+mp.get(c,0)
         
-        heap = [(-v,k) for k,v in mp.items()]
-        
-        heapq.heapify(heap)
-        
+        bucket = [[] for _ in range(len(s)+1)]
+            
+        for k,v in mp.items():
+            count = v
+            while count:
+                bucket[v].append(k)
+                count-=1
+            
         result = ""
         
-        while heap:
-            v,k = heapq.heappop(heap)
-            v*=-1
+        for i in range(len(bucket)-1,-1,-1):
+            b = bucket[i]
             
-            result+=k*v
-        
+            if b:
+                result+="".join(b)
+            
         return result
-    
-    
-        # bucket
-        # heap    
