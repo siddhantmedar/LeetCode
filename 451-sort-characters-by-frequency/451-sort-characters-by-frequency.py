@@ -1,21 +1,23 @@
 class Solution:
     def frequencySort(self, s: str) -> str:
-        mp = {x:0 for x in s}
+        mp = {}
         
         for c in s:
-            mp[c]+=1
+            mp[c] = 1+mp.get(c,0)
             
-        bucket = [[] for i in range(len(s)+1)]
+        mp = dict(sorted(mp.items(), key=lambda x:-x[1]))
+        
+        result = ""
         
         for k,v in mp.items():
-            bucket[v].append(k)
-            
-        res = ""
-        for i in range(len(bucket)-1,-1,-1):
-            b = bucket[i]
-            
-            if b:
-                for ele in b:
-                    res+=(i*ele)
-                    
-        return res
+            while v:
+                result+=k
+                v-=1
+                
+        return result
+    
+    
+        # bucket
+        # heap 
+        # sorting
+        
