@@ -4,16 +4,23 @@ class Solution:
         
         for ele in nums:
             mp[ele] = 1+mp.get(ele, 0)
-            
-        heap = [(-v,k) for k,v in mp.items()]
         
-        heapq.heapify(heap)
+        bucket = [[] for _ in range(len(nums)+1)]
+        
+        for key,val in mp.items():
+            bucket[val].append(key)
         
         result = []
         
-        while k:
-            val, key = heapq.heappop(heap)
-            result.append(key)
-            k-=1
+        for i in range(len(bucket)-1,-1,-1):
+            b = bucket[i]
             
+            if b:
+                for key in b:
+                    if k == 0:
+                        break
+                        
+                    result.append(key)
+                    k-=1
+        
         return result
