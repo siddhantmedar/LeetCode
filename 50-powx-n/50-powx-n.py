@@ -1,27 +1,23 @@
 class Solution:
-    def myPow(self, a: float, b: int) -> float:
-        def solve(b):
-            if b == 1:
-                return a
-            
-            elif b == 0:
+    def myPow(self, x: float, n: int) -> float:
+        def solve(a,n):
+            if n == 0:
                 return 1
             
-            res = solve(b//2)
+            elif n == 1:
+                return a
             
-            if b%2 == 0:
+            if n%2 == 0:
+                res = solve(a,n//2)
                 return res*res
-            else:
-                return a*res*res
             
-        flag = False
-        
-        if b < 0:
-            flag = True
-            b = abs(b)
-        
-        if flag:
-            return 1/solve(b)
+            elif n%2 == 1:
+                res = solve(a,(n-1)//2)
+                return res*res*a
+            
+        if n < 0:
+            n*=-1
+            return 1/solve(x, abs(n))
         
         else:
-            return solve(b)
+            return solve(x,n)
