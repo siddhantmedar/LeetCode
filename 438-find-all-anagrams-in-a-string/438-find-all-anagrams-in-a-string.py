@@ -1,36 +1,37 @@
 class Solution:
     def findAnagrams(self, s: str, p: str) -> List[int]:
+        if len(p) > len(s):
+            return []
+        
+        result = []
+        
+        ref = {}
         mp = {}
-        tmp = {}
-        res = []
         
-        i = 0
+        k = len(p)
         
-        for c in p:
-            mp[c] = 1+mp.get(c,0)
-        
-        size = 0
-        
-        for j in range(len(s)):
-            c = s[j]
+        for i,c in enumerate(p):
+            ref[c] = 1+ref.get(c,0)
             
-            if size < len(p):
-                tmp[c] = 1+tmp.get(c,0)
-                size+=1
+        for i in range(k):
+            mp[s[i]] = 1+mp.get(s[i],0)
+            
+        if ref == mp:
+            result.append(0)
+        
+        for i in range(k, len(s)):
+            print(i, s[i-k], s[i])
+            mp[s[i-k]]-=1
+            
+            if mp[s[i-k]] == 0:
+                del mp[s[i-k]]
                 
-            if size == len(p):
-                if tmp == mp:
-                    res.append(i)
-                    
-                while size >= len(p):
-                    ch = s[i]
-                    tmp[ch]-=1
-                    size-=1
-                    i+=1
-                    if not tmp[ch]:
-                        del tmp[ch]
+            mp[s[i]] = 1+mp.get(s[i],0)
             
-        if size == len(p) and tmp == mp:
-            res.append(i)
-          
-        return res
+            if ref == mp:
+                result.append(i-k+1)
+                
+        return result
+    
+        # c b a e b a b a c d
+        # 0 1 2 3 4 5 6 7 8 9
