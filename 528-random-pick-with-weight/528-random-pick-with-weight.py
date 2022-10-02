@@ -13,9 +13,22 @@ class Solution:
     def pickIndex(self) -> int:
         target = random.random()*self.sm
         
-        for i, ele in enumerate(self.prefix):
-            if ele > target:
-                return i
+        start, end = 0, len(self.prefix)-1
+        
+        result = None
+        
+        while start <= end:
+            mid = (start+end)>>1
+            
+            if self.prefix[mid] > target:
+                result = mid
+                end = mid-1
+                
+            else:
+                start = mid+1
+                
+        return result
+        
         
 # Your Solution object will be instantiated and called as such:
 # obj = Solution(w)
