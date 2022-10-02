@@ -8,33 +8,37 @@
 
 class Solution:
     def copyRandomBinaryTree(self, root: 'Optional[Node]') -> 'Optional[NodeCopy]':
-        def dfs(root):
-            if not root:
-                return
-            
-            mp[root] = mp.get(root, NodeCopy(root.val))
-            
-            dfs(root.left)    
-            dfs(root.right)
-            
-            
-        def link(root):
-            if not root:
-                return
-            
-            mp[root].left = mp[root.left if root else None]
-            mp[root].right = mp[root.right if root else None]    
-            mp[root].random = mp[root.random if root else None]
-            
-            link(root.left)
-            link(root.right)
-            
         if not root:
             return None
         
         mp = {None:None}
         
-        dfs(root)
-        link(root)
+        st = [root]
+
+        while st:
+            node = st.pop()
+            
+            mp[node] = mp.get(node, NodeCopy(node.val))
+            
+            if node.left:
+                st.append(node.left)
+                
+            if node.right:
+                st.append(node.right)
+                
+        st = [root]
+        
+        while st:
+            node = st.pop()
+            
+            mp[node].left = mp[node.left]
+            mp[node].right = mp[node.right]
+            mp[node].random = mp[node.random]
+            
+            if node.left:
+                st.append(node.left)
+                
+            if node.right:
+                st.append(node.right)
         
         return mp[root]
