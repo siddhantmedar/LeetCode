@@ -9,17 +9,17 @@ class Solution:
         if not root:
             return []
         
-        result = []
+        result = deque()
         
         q = deque([root])
         
         while q:
             n = len(q)
-            lst = []
+            tmp = []
             
             for k in range(n):
                 node = q.popleft()
-                lst.append(node.val)
+                tmp.append(node.val)
                 
                 if node.left:
                     q.append(node.left)
@@ -27,7 +27,6 @@ class Solution:
                 if node.right:
                     q.append(node.right)
                     
-            result.append(lst)
+            result.append(tmp)
             
         return result
-        
