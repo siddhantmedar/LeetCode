@@ -23,8 +23,39 @@ class Solution:
                 dfs(c)
                 
             
-        mp = {None:None}
+#         mp = {None:None}
         
-        dfs(root)
+#         dfs(root)
         
-        return mp[root]
+#         return mp[root]
+    
+        def bfsSolution(root):
+            def bfs(root):
+                if not root:
+                    return
+                
+                q = deque([root])
+                
+                while q:
+                    n = len(q)
+                    
+                    for k in range(n):
+                        node = q.popleft()
+                        
+                        mp[node] = mp.get(node, Node(node.val))
+                        
+                        for c in node.children:
+                            if c:
+                                mp[c] = mp.get(c, Node(c.val))
+                                q.append(c)
+                                
+                            mp[node].children.append(mp[c])
+                        
+                
+            mp = {None:None}
+            
+            bfs(root)
+            
+            return mp[root]
+        
+        return bfsSolution(root)
