@@ -5,8 +5,6 @@ class Solution:
         for c in s:
             if c.isalnum():
                 t+=c.lower()
-                
-        print(t)
         
         start, end = 0, len(t)-1
         
