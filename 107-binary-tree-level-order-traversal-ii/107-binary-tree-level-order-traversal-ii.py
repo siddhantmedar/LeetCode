@@ -9,7 +9,7 @@ class Solution:
         if not root:
             return []
         
-        res = []
+        result = deque()
         
         q = deque([root])
         
@@ -17,16 +17,16 @@ class Solution:
             n = len(q)
             tmp = []
             
-            for i in range(n):
+            for k in range(n):
                 node = q.popleft()
-                tmp.append(node.val)    
-            
+                tmp.append(node.val)
+                
                 if node.left:
                     q.append(node.left)
                     
                 if node.right:
                     q.append(node.right)
                     
-            res.append(tmp)
+            result.appendleft(tmp)
             
-        return res[::-1]
+        return result
