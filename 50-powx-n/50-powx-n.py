@@ -4,9 +4,6 @@ class Solution:
             if n == 0:
                 return 1
             
-            elif n == 1:
-                return a
-            
             if n%2 == 0:
                 res = solve(a,n//2)
                 return res*res
