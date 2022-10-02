@@ -26,9 +26,6 @@ class Solution:
         parent = {(i,j):(i,j) for i in range(M) for j in range(N) if grid[i][j] == "1"}
         size = {(i,j):1 for i in range(M) for j in range(N) if grid[i][j] == "1"}
         
-        print(parent)
-        print(size)
-        
         for i in range(M):
             for j in range(N):
                 if grid[i][j] == "1":
