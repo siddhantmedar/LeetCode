@@ -10,33 +10,19 @@ class Node:
 
 class Solution:
     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
-        def bfs(root):
-            if not root:
-                return
-            
-            q = deque([root,'#'])
-            
-            while q:
-                n = len(q)
-                
-                for k in range(n):
-                    if q[0] == '#':
-                        q.popleft()
-                        continue
-                    
-                    node = q.popleft()
-                       
-                    node.next = q[0] if q and q[0] != "#" else None
-                    
-                    if node.left:
-                        q.append(node.left)
-                        
-                    if node.right:
-                        q.append(node.right)
-                
-                if q:
-                    q.append('#')
-            
-            return root
+        curr, nxt = root, root.left if root else None
         
-        return bfs(root)
+        while curr and nxt:
+            curr.left.next = curr.right
+            
+            if curr.next:
+                curr.right.next = curr.next.left
+                
+            curr = curr.next
+            
+            if not curr:
+                curr = nxt
+                nxt = curr.left 
+                
+        return root
+        
