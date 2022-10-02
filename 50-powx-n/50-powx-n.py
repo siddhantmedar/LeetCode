@@ -4,12 +4,12 @@ class Solution:
             if n == 0:
                 return 1
             
+            res = solve(a,n//2)
+            
             if n%2 == 0:
-                res = solve(a,n//2)
                 return res*res
             
-            elif n%2 == 1:
-                res = solve(a,(n-1)//2)
+            else:
                 return res*res*a
             
         if n < 0:
