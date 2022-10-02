@@ -1,30 +1,31 @@
 class Solution:
-    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
-            def dfs(i, j, st, par):
-                if i<0 or i>=m or j<0 or j>=n or par > heights[i][j] or (i,j) in st:
-                    return
+    def pacificAtlantic(self, grid: List[List[int]]) -> List[List[int]]:
+        def dfs(i,j,x,y,st):
+            if i<0 or j<0 or i>=M or j>=N or (i,j) in st or grid[i][j] < grid[x][y]:
+                return
             
-                st.add((i,j))
-
-                for x,y in directions:
-                    x = x+i
-                    y = y+j
-
-                    if (x,y) not in st:
-                        dfs(x, y, st, heights[i][j])
-
+            st.add((i,j))
             
-            m,n = len(heights), len(heights[0])
-            directions = [(0,1),(1,0),(0,-1),(-1,0)]
-
-            pacific, atlantic = set(), set()
-
-            for j in range(n):
-                dfs(0,j,pacific,heights[0][j])
-                dfs(m-1,j,atlantic,heights[m-1][j])
-
-            for i in range(m):
-                dfs(i,0,pacific,heights[i][0])
-                dfs(i,n-1,atlantic,heights[i][n-1])
-
-            return list(atlantic.intersection(pacific))
+            for dx, dy in directions:
+                dx+=i
+                dy+=j
+                
+                dfs(dx,dy,i,j,st)
+        
+        
+        M,N = len(grid), len(grid[0])
+        directions = [(-1,0),(1,0),(0,-1),(0,1)]
+        
+        pac, atl = set(), set()
+        
+        for j in range(N):
+            dfs(0,j,0,j,pac)
+            dfs(M-1,j,M-1,j,atl)
+            
+        for i in range(M):
+            dfs(i,0,i,0,pac)
+            dfs(i,N-1,i,N-1,atl)
+            
+        print(atl.intersection(pac))
+        
+        return atl.intersection(pac)
