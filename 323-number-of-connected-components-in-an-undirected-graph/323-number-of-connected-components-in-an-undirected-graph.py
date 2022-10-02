@@ -6,14 +6,14 @@ class Solution:
             for nei in graph[node]:
                 if nei not in visited:
                     dfs(nei)
-        
-        
+            
+            
         graph = defaultdict(list)
         
         for u,v in edges:
             graph[u].append(v)
             graph[v].append(u)
-        
+            
         visited = set()
         
         count = 0
