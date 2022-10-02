@@ -17,23 +17,23 @@ class Solution:
         
         while q:
             n = len(q)
-            tmp = []
+            tmp = deque()
             
             for k in range(n):
                 node = q.popleft()
-                tmp.append(node.val)
                 
+                if flag:
+                    tmp.append(node.val)
+                else:
+                    tmp.appendleft(node.val)
+                    
                 if node.left:
                     q.append(node.left)
                     
                 if node.right:
                     q.append(node.right)
             
-            if flag:
-                result.append(tmp)
-    
-            else:
-                result.append(tmp[::-1])
+            result.append(tmp)
             
             flag = not flag
             
