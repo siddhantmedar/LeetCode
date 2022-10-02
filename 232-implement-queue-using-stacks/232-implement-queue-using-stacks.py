@@ -3,7 +3,7 @@ class MyQueue:
     def __init__(self):
         self.st = []
         self.helper = []
-        
+
     def push(self, x: int) -> None:
         if not self.st:
             self.st.append(x)
@@ -11,12 +11,12 @@ class MyQueue:
         else:
             while self.st:
                 self.helper.append(self.st.pop())
-            
+                
             self.st.append(x)
             
             while self.helper:
                 self.st.append(self.helper.pop())
-            
+
     def pop(self) -> int:
         if self.st:
             return self.st.pop()
