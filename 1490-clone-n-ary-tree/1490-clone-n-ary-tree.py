@@ -8,42 +8,23 @@ class Node:
 
 class Solution:
     def cloneTree(self, root: 'Node') -> 'Node':
-        def DFS(root):
-            def solveDFS(root):
-                if not root:
-                    return root
-
-                mp[root] = Node(root.val)
-
-                mp[root].children = [solveDFS(c) for c in root.children]
-
-                return mp[root]
-
-            mp = {}
-
-            return solveDFS(root)
-        
-        # return DFS()
-    
-        def solveBFS(root):
+        def dfs(root):
             if not root:
-                return root
+                return
             
-            mp = {root: Node(root.val)}
+            mp[root] = mp.get(root, Node(root.val))
             
-            q = deque([root])
-            
-            while q:
-                n = len(q)
+            for c in root.children:
+                if c:
+                    mp[c] = mp.get(c, Node(c.val))
+                    
+                mp[root].children.append(mp[c])
                 
-                for i in range(n):
-                    node = q.popleft()
-                        
-                    for c in node.children:
-                        mp[c] = Node(c.val)
-                        mp[node].children.append(mp[c])
-                        q.append(c)
-
-            return mp[root]
-
-        return solveBFS(root)
+                dfs(c)
+                
+            
+        mp = {None:None}
+        
+        dfs(root)
+        
+        return mp[root]
