@@ -1,3 +1,4 @@
+[Discussion Post (created on 1/9/2022 at 20:18)](https://leetcode.com/problems/palindrome-number/discuss/2648394/Simple-Solution-oror-Python)  
 <h2>9. Palindrome Number</h2><h3>Easy</h3><hr><div><p>Given an integer <code>x</code>, return <code>true</code> if <code>x</code> is palindrome integer.</p>
 
 <p>An integer is a <strong>palindrome</strong> when it reads the same backward as forward. For example, <code>121</code> is palindrome while <code>123</code> is not.</p>
