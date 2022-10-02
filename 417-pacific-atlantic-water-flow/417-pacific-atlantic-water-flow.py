@@ -25,7 +25,5 @@ class Solution:
         for i in range(M):
             dfs(i,0,i,0,pac)
             dfs(i,N-1,i,N-1,atl)
-            
-        print(atl.intersection(pac))
         
         return atl.intersection(pac)
