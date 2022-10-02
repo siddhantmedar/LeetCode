@@ -20,7 +20,7 @@ class Solution:
             result.append(0)
         
         for i in range(k, len(s)):
-            print(i, s[i-k], s[i])
+            # print(i, s[i-k], s[i])
             mp[s[i-k]]-=1
             
             if mp[s[i-k]] == 0:
