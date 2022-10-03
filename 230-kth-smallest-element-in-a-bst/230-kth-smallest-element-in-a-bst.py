@@ -7,26 +7,6 @@
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
         def inorder(root):
-            nonlocal result, found, k
-            
-            if not root:
-                return
-            
-            if found:
-                return 
-            
-            inorder(root.left)
-            
-            k-=1 
-            
-            if k == 0:
-                result = root.val
-                found = True
-            
-            inorder(root.right)
+            return inorder(root.left)+[root.val]+inorder(root.right) if root else []
         
-        result, found = None, False
-        
-        inorder(root)
-        
-        return result
+        return inorder(root)[k-1]
