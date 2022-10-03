@@ -3,29 +3,31 @@ class Solution:
         st = []
         
         for c in tokens:
-            if c not in ("+","-","*","/"):
-                st.append(int(c))
+            if c == "+" or c == "-" or c == "*" or c == "/":
+                if len(st) >= 2:
+                    b = st.pop()
+                    a = st.pop()
+                    
+                    if c == "+":
+                        st.append(a+b)
+                        
+                    elif c == "-":
+                        st.append(a-b)
+                        
+                    elif c == "*":
+                        st.append(a*b)
+                        
+                    elif c == "/":
+                        result = a/b
+                        
+                        if result > 0:
+                            st.append(floor(result))
+                        else:
+                            st.append(ceil(result))
+                
             else:
-                num2 = st.pop()
-                num1 = st.pop()
-                
-                if c == "+":
-                    st.append(num1+num2)
-                
-                elif c == "-":
-                    st.append(num1-num2)
-                    
-                elif c == "*":
-                    st.append(num1*num2)
-                
-                elif c == "/":
-                    res = num1/num2
-                    
-                    if res < 0:
-                        st.append(ceil(res))
-                    else:
-                        st.append(floor(res))
-
-        return st[0]
+                st.append(int(c))
         
+        return st[0]
+                
         
