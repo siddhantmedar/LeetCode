@@ -1,21 +1,17 @@
 class Solution:
     def merge(self, nums: List[List[int]]) -> List[List[int]]:
-        nums.sort()
+        nums.sort(key=lambda x:x[0])
         
         st = [nums[0]]
         
-        for i in nums[1:]:
-            if st[-1][1] >= i[0]:
+        for start, end in nums[1:]:
+            if start <= st[-1][1]:
                 last = st.pop()
                 
-                start, end = min(last[0],i[0]), max(last[1], i[1])
-                st.append([start, end])
+                start = min(last[0], start)
+                end = max(last[1], end)
                 
-            else:
-                st.append(i)
+            st.append([start,end])
+                
                 
         return st
-    
-        # [[1,6],[8,10],[15,18]]
-            
-            
