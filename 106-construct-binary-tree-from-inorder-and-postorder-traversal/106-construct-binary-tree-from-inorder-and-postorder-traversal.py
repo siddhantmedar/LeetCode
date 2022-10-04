@@ -6,23 +6,27 @@
 #         self.right = right
 class Solution:
     def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
-        mp = defaultdict()
+        def getIdx(ele):
+            for i,x in enumerate(inorder):
+                if x == ele:
+                    return i
         
-        for i, ele in enumerate(inorder):
-            mp[ele] = i
-            
+        
         def solve(sp, ep, si, ei):
             if sp > ep or si > ei:
                 return None
             
+            idx = getIdx(postorder[ep])
+            
             root = TreeNode(postorder[ep])
-            idx = mp[postorder[ep]]
+            
             count = idx-si
             
-            root.left = solve(sp, sp+count-1, si, idx-1) 
+            root.left = solve(sp, sp+count-1, si, idx-1)
+            
             root.right = solve(sp+count, ep-1, idx+1, ei)
             
             return root
         
-        return solve(0, len(postorder)-1, 0, len(inorder)-1)
         
+        return solve(0, len(postorder)-1, 0, len(inorder)-1)
