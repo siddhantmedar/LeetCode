@@ -18,8 +18,5 @@ class Solution:
                 return 1
         
         nums.sort(key=cmp)
-        
-        while len(nums) > 1 and nums[0] == 0:
-            nums.pop(0)
-            
-        return "".join([str(x) for x in nums])
+
+        return "".join([str(x) for x in nums]) if nums[0] != 0 else "0"
