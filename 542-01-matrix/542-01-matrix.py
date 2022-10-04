@@ -27,7 +27,6 @@ class Solution:
                     if 0<=dx<M and 0<=dy<N and result[dx][dy] > 1 + result[i][j]:
                         result[dx][dy] = 1+result[i][j]
                         q.append((dx,dy))
-                        
-        print(result)
+        
         
         return result
