@@ -19,7 +19,6 @@ class Solution:
                 
                 if not equal:
                     st.append(ele)
-                        
-        print(st)
+        
         
         return st
