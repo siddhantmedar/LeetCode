@@ -1,19 +1,30 @@
 class Solution:
-    def floodFill(self, image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
-        def dfs(i,j, new_color, old_color):
-            if i<0 or i>=M or j<0 or j>=N or image[i][j] != old_color or image[i][j] == new_color:
+    def floodFill(self, grid: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+        def dfs(i, j, src, fill):
+            if i<0 or j<0 or i>=M or j>=N or grid[i][j] != src or grid[i][j] == fill:
                 return
             
-            image[i][j] = new_color
+            grid[i][j] = fill
             
-            dfs(i-1,j, new_color, old_color)
-            dfs(i+1,j, new_color, old_color)
-            dfs(i,j-1, new_color, old_color)
-            dfs(i,j+1, new_color, old_color)
+            for dx, dy in directions:
+                dx+=i
+                dy+=j
+                
+                dfs(dx,dy,src,fill)
+            
         
-        M,N = len(image), len(image[0])
+        M,N = len(grid), len(grid[0])
         
-        dfs(sr,sc, color, image[sr][sc])
+        directions = [(-1,0),(1,0),(0,-1),(0,1)]
         
-        return image
+        dfs(sr, sc, grid[sr][sc], color)
         
+        return grid
+    
+    
+    
+#      [0,0,0]
+#      [2,2,2]
+# 1
+# 0
+# 2
