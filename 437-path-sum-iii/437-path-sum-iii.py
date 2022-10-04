@@ -5,32 +5,35 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> int:
-        def solve(root, target):
-            nonlocal count
+    def pathSum(self, root: Optional[TreeNode], target: int) -> int:
+        def solve(root):
+            nonlocal prefix, result
             
             if not root:
                 return
             
-            if root.val-target == 0:
-                count+=1
+            prefix+=root.val
+            
+            if prefix-target in mp:
+                result+=mp[prefix-target]
                 
-            solve(root.left, target-root.val)
-            solve(root.right, target-root.val)
+            mp[prefix] = 1+mp.get(prefix,0)
             
+            solve(root.left)
+            solve(root.right)
+            
+            mp[prefix]-=1
+            
+            if not mp[prefix]:
+                del mp[prefix]
+                
+            prefix-=root.val
+            
+                
+        mp = {0:1}
+        result = 0
+        prefix = 0
         
-        def dfs(root):
-            if not root:
-                return
-            
-            solve(root, targetSum)
-            
-            dfs(root.left)
-            dfs(root.right)
-            
-            
-        count = 0
+        solve(root)
         
-        dfs(root)
-        
-        return count
+        return result
