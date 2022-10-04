@@ -13,28 +13,19 @@ class Solution:
         if not root:
             return root
         
-        q = deque([root,"#"])
+        curr, nxt = root, root.left if root else None
         
-        while q:
-            n = len(q)
+        while curr and nxt:
+            curr.left.next = curr.right
             
-            for k in range(n):
-                if q[0] == "#":
-                    q.popleft()
-                    continue
+            if curr.next:
+                curr.right.next = curr.next.left
                 
-                node = q.popleft()
+            curr = curr.next
+            
+            if not curr:
+                curr = nxt
+                nxt = curr.left
                 
-                node.next = q[0] if q[0] != "#" else None
-                
-                if node.left:
-                    q.append(node.left)
-                   
-                if node.right:
-                    q.append(node.right)
-                   
-            if q:
-                q.append("#")
-                   
         return root
         
