@@ -10,7 +10,6 @@ class Solution:
             if not root:
                 return
             
-            # mp[dist].append(root.val)
             q.append((col, row, root.val))
             
             dfs(root.left, row+1, col-1)
