@@ -10,15 +10,15 @@ class Pair:
         self.lst = lst
         
     def __lt__(self, other):
-        if self.val < other.val or self.lst.val < other.lst.val:
+        if self.val < other.val:
             return True
         
     def __gt__(self, other):
-        if self.val > other.val or self.lst.val > other.lst.val:
+        if self.val > other.val:
             return True
         
     def __eq__(self, other):
-        if self.val == other.val and self.lst.val  == other.lst.val:
+        if self.val == other.val:
             return True
 
 class Solution:
