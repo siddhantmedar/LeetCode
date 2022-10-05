@@ -3,17 +3,21 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        i,j = 0, 0
+        low, high = 0, 0
         
-        while j < len(nums):
-            if nums[i] == 0 and nums[j] != 0:
-                nums[i], nums[j] = nums[j], nums[i]
-                i+=1
-    
-            elif (nums[i] != 0 and nums[j] == 0) or (nums[i] != 0 and nums[j] != 0):
-                i+=1
+        while high < len(nums):
+            if nums[low] == 0 and nums[high] == 0:
+                high+=1
             
-            j+=1
+            elif nums[low] == 0 and nums[high] != 0:
+                nums[low], nums[high] = nums[high], nums[low]
+                low+=1
+                high+=1
                 
-        
-        
+            elif nums[low] != 0 and nums[high] == 0:
+                low+=1
+                high+=1
+                
+            elif nums[low] != 0 and nums[high] != 0:
+                low+=1
+                high+=1
