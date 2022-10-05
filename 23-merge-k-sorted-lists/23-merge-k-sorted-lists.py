@@ -14,25 +14,28 @@ class Pair:
             return True
         else:
             return False
-    def __eq__(self, other):
-        if self.val == other.val and self.lst.val == other.lst.val:
-            return True
-        else:
-            return False
+        
     def __gt__(self, other):
         if self.val > other.val or self.lst.val > other.lst.val:
             return True
         else:
             return False
         
-class Solution:    
+    def __eq__(self, other):
+        if self.val == other.val and self.lst.val  == other.lst.val:
+            return True
+        else:
+            return False
+        
+
+class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
         heap = []
         
-        for list in lists:
-            if list:
-                heapq.heappush(heap, Pair(list.val, list))
-        
+        for lst in lists:
+            if lst:
+                heapq.heappush(heap, Pair(lst.val, lst))
+                
         heapq.heapify(heap)
         
         dummy = ListNode(-1)
@@ -41,15 +44,14 @@ class Solution:
         while heap:
             p = heapq.heappop(heap)
             
-            val, node = p.val, p.lst
+            val, lst = p.val, p.lst
             
             tmp.next = ListNode(val)
             tmp = tmp.next
-            tmp.next = None
-                
-            node = node.next
             
-            if node:
-                heapq.heappush(heap, Pair(node.val, node))
-        
+            lst = lst.next
+            
+            if lst:
+                heapq.heappush(heap, Pair(lst.val, lst))
+                
         return dummy.next
