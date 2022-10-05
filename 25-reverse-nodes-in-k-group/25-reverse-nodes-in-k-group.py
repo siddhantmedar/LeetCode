@@ -15,40 +15,41 @@ class Solution:
                 curr = ref
                 
             return pre
-        
-        dummy = ListNode(-1)
-        tmp = dummy
-        
-        ptr = head
-        
-        while ptr:
-            count = 0
-            ptr = head
             
-            while count != k and ptr:
+            
+        dummy = ListNode(-1)
+        
+        ptr = dummy
+        tmp = head
+        
+        while tmp:
+            count = 0
+            
+            hd = tmp
+            
+            while tmp:
                 count+=1
-                
                 if count == k:
                     break
-                    
-                ptr = ptr.next
-                
+            
+                tmp = tmp.next
+            
             if count == k:
-                ref = ptr.next if ptr else None
-                ptr.next = None
-                revHead = reverse(head)
-                tmp.next = revHead
+                ref = tmp.next
                 
-                while tmp.next:
-                    tmp = tmp.next
-                    
-                head = ref
+                tmp.next = None
+                
+                rev = reverse(hd)
+                
+                ptr.next = rev
+                
+                while ptr.next:
+                    ptr = ptr.next
+                
+                tmp = ref
             
             else:
-                tmp.next = head
-        
+                ptr.next =  hd
+                
         return dummy.next
-                    
-                
-                
                 
