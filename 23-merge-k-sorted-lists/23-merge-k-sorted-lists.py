@@ -12,21 +12,14 @@ class Pair:
     def __lt__(self, other):
         if self.val < other.val or self.lst.val < other.lst.val:
             return True
-        else:
-            return False
         
     def __gt__(self, other):
         if self.val > other.val or self.lst.val > other.lst.val:
             return True
-        else:
-            return False
         
     def __eq__(self, other):
         if self.val == other.val and self.lst.val  == other.lst.val:
             return True
-        else:
-            return False
-        
 
 class Solution:
     def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
