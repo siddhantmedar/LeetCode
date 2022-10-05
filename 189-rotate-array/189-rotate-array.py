@@ -8,7 +8,7 @@ class Solution:
         for i in range(len(nums)):
             result[(i+k)%len(nums)] = nums[i]
             
-        print(result)
+        # print(result)
         
         for i in range(len(nums)):
             nums[i] = result[i]
