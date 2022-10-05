@@ -6,7 +6,7 @@ class Solution:
         
         prefix = 0
         
-        for i, ele in enumerate(nums):
+        for i,ele in enumerate(nums):
             prefix+=ele
             
             if prefix-k in mp:
