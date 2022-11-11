@@ -4,8 +4,8 @@ class Solution:
             cnt = 0
             
             while n:
-                cnt+=(n&1)
-                n>>=1
+                n = n&(n-1)
+                cnt+=1
                 
             return cnt
         
