@@ -8,28 +8,57 @@ class Node:
 
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
-        def dfs(node):
-            if node not in mp:
-                mp[node] = Node(node.val)
+        def bfs(node):
+            if not node:
+                return None
             
-            visited.add(node)
+            mp = {node:Node(node.val)}
+            visited = set([node])
             
-            for nei in node.neighbors:
-                if nei not in mp:
-                    mp[nei] = Node(nei.val)
-                    
-                mp[node].neighbors.append(mp[nei])
+            q = deque([node])
+            
+            while q:
+                n = len(q)
                 
-                if nei not in visited:
-                    dfs(nei)
+                for k in range(n):
+                    nd = q.popleft()
+                        
+                    for nei in nd.neighbors:
+                        if nei not in mp:
+                            mp[nei] = Node(nei.val)
+                        
+                        mp[nd].neighbors.append(mp[nei])
+                        
+                        if nei not in visited:
+                            visited.add(nei)
+                            q.append(nei)
+            
+            return mp[node]
+        
+        return bfs(node)    
+            
+#         def dfs(node):
+#             if node not in mp:
+#                 mp[node] = Node(node.val)
+            
+#             visited.add(node)
+            
+#             for nei in node.neighbors:
+#                 if nei not in mp:
+#                     mp[nei] = Node(nei.val)
+                    
+#                 mp[node].neighbors.append(mp[nei])
+                
+#                 if nei not in visited:
+#                     dfs(nei)
         
         
-        mp = {}
-        visited = set()
+#         mp = {}
+#         visited = set()
         
-        if not node:
-            return None
+#         if not node:
+#             return None
         
-        dfs(node)
+#         dfs(node)
         
-        return mp[node]
+#         return mp[node]
