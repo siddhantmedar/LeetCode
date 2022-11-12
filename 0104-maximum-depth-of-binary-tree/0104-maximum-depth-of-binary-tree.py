@@ -10,7 +10,22 @@ class Solution:
             if not root:
                 return 0
             
-            return max(solve(root.left), solve(root.right))+1
+            q = deque([root])
+            
+            cnt = 0
+            
+            while q:
+                n = len(q)
+                cnt+=1
+                for k in range(n):
+                    node = q.popleft()
+                    
+                    if node.left:
+                        q.append(node.left)
+                        
+                    if node.right:
+                        q.append(node.right)
+                        
+            return cnt
         
         return solve(root)
-        
