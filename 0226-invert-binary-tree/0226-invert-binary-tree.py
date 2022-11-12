@@ -17,4 +17,29 @@ class Solution:
             
             return root
             
-        return solve(root)
+        # return solve(root)
+    
+    
+        def solve2(root):
+            if not root:
+                return root
+            
+            q = deque([root])
+            
+            while q:
+                n = len(q)
+                
+                for k in range(n):
+                    node = q.popleft()
+                    
+                    node.left, node.right = node.right, node.left
+                    
+                    if node.left:
+                        q.append(node.left)
+                        
+                    if node.right:
+                        q.append(node.right)
+                        
+            return root
+        
+        return solve2(root)
