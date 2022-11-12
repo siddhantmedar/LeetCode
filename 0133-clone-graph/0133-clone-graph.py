@@ -28,7 +28,7 @@ class Solution:
         visited = set()
         
         if not node:
-            return node
+            return None
         
         dfs(node)
         
