@@ -36,9 +36,4 @@ class Solution:
                         if 0<=dx<M and 0<=dy<N and grid[dx][dy] == "1":
                             union(i,j,dx,dy)
         
-        for i in range(M):
-            for j in range(N):
-                if grid[i][j] == "1":
-                    find(i,j)
-        
         return sum([1 for k,v in parent.items() if k == v])
