@@ -1,18 +1,27 @@
 class Solution:
-    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+    def topKFrequent(self, nums: List[int], K: int) -> List[int]:
         mp = {}
         
         for ele in nums:
             mp[ele] = 1+mp.get(ele,0)
             
-        heap = [(-v,k) for k,v in mp.items()]
-        heapq.heapify(heap)
+        size = max([v for k,v in mp.items()])
         
+        container = [set() for _ in range(size+1)]
+        
+        for k,v in mp.items():
+            container[v].add(k)
+            
         result = []
         
-        for _ in range(k):
-            v,k = heapq.heappop(heap)
+        for i in range(len(container)-1,-1,-1):
+            box = container[i]
             
-            result.append(k)
-            
+            if box:
+                for ele in box:
+                    if len(result) == K:
+                        break
+                    
+                    result.append(ele)
+                    
         return result
