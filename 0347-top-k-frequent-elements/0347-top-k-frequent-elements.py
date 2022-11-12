@@ -5,6 +5,14 @@ class Solution:
         for ele in nums:
             mp[ele] = 1+mp.get(ele,0)
             
-        lst = sorted(mp.items(),key=lambda x:-x[1])
+        heap = [(-v,k) for k,v in mp.items()]
+        heapq.heapify(heap)
         
-        return [x[0] for x in lst[:k]]
+        result = []
+        
+        for _ in range(k):
+            v,k = heapq.heappop(heap)
+            
+            result.append(k)
+            
+        return result
