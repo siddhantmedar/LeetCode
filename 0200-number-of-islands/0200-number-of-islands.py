@@ -1,34 +1,44 @@
 class Solution:
-    def numIslands(self, nums: List[List[str]]) -> int:
-        def bfs(i,j):
-            q = deque([(i,j)])
-            
-            while q:
-                n = len(q)
+    def numIslands(self, grid: List[List[str]]) -> int:
+        def find(x,y):
+            if parent[(x,y)] != (x,y):
+                parent[(x,y)] = find(parent[(x,y)][0], parent[(x,y)][1])
                 
-                for k in range(n):
-                    i,j = q.popleft()
+            return parent[(x,y)]
+        
+        def union(i,j,x,y):
+            setX = find(i,j)
+            setY = find(x,y)
+            
+            if setX != setY:
+                if size[setX] >= size[setY]:
+                    size[setX]+=1
+                    parent[setY] = setX
                     
-                    if i<0 or i>=M or j<0 or j>=N or nums[i][j] == "0":
-                            continue
-                        
-                    nums[i][j] = "0"
-                    
+                else:
+                    size[setY]+=1
+                    parent[setX] = setY
+            
+            
+        M,N = len(grid), len(grid[0])
+        directions = [(-1,0),(1,0),(0,-1),(0,1)]
+        
+        parent = {(i,j):(i,j) for i in range(M) for j in range(N) if grid[i][j] == "1"}
+        size = {(i,j):1 for i in range(M) for j in range(N) if grid[i][j] == "1"}
+        
+        for i in range(M):
+            for j in range(N):
+                if grid[i][j] == "1":
                     for dx,dy in directions:
                         dx+=i
                         dy+=j
                         
-                        q.append((dx,dy))
-                
-        M,N = len(nums), len(nums[0])
-        directions = [(-1,0),(1,0),(0,-1),(0,1)]
-        
-        cnt = 0
+                        if 0<=dx<M and 0<=dy<N and grid[dx][dy] == "1":
+                            union(i,j,dx,dy)
         
         for i in range(M):
             for j in range(N):
-                if nums[i][j] == "1":
-                    bfs(i,j)
-                    cnt+=1
-                    
-        return cnt
+                if grid[i][j] == "1":
+                    find(i,j)
+        
+        return sum([1 for k,v in parent.items() if k == v])
