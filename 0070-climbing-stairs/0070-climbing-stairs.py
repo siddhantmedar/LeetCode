@@ -16,15 +16,15 @@ class Solution:
         
         
         def solve2():
-            dp = [0]*(n+1)
-            
-            dp[0]=1
-            dp[1]=1
+            a=1
+            b=1
             
             for i in range(2, len(dp)):
-                dp[i] = dp[i-1]+dp[i-2]
-                
-            return dp[n]
+                sm = a+b
+                a = b
+                b = sm
+            
+            return b
         
         return solve2()
         
