@@ -4,14 +4,11 @@ class Solution:
         
         for ele in nums:
             xor^=ele
-            
-        print(xor)
+        
         mask = 1
         
         while mask&xor == 0:
             mask<<=1
-            
-        print(mask)
         
         g1, g2 = 0,0
         
@@ -20,7 +17,5 @@ class Solution:
                 g1^=ele
             else:
                 g2^=ele
-                
-        print(g1,g2)
         
         return [g1,g2]
