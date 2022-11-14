@@ -25,11 +25,7 @@ class MinStack:
             
     def top(self) -> int:
         if self.st:
-            if self.st[-1] > self.mn:
-                return self.st[-1] 
-            else:
-                ele = self.st[-1]
-                return (ele+(2*self.mn-ele))//2
+            return self.st[-1] if self.st[-1] > self.mn else (self.st[-1]+(2*self.mn-self.st[-1]))//2
 
     def getMin(self) -> int:
         return self.mn
