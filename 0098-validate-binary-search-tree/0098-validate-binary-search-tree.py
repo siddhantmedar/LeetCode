@@ -7,8 +7,6 @@
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         def inorder(root):
-            nonlocal res
-            
             if not root:
                 return
             
