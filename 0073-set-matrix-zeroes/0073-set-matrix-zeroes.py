@@ -3,17 +3,32 @@ class Solution:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        row, col = set(), set()
-        
         M,N = len(nums), len(nums[0])
+        row, col = False, False
         
+        for j in range(N):
+            if nums[0][j] == 0:
+                row = True
+                
         for i in range(M):
-            for j in range(N):
+            if nums[i][0] == 0:
+                col = True
+                
+        for i in range(1,M):
+            for j in range(1,N):
                 if nums[i][j] == 0:
-                    row.add(i)
-                    col.add(j)
+                    nums[i][0] = 0
+                    nums[0][j] = 0
                     
-        for i in range(M):
-            for j in range(N):
-                if i in row or j in col:
+        for i in range(1,M):
+            for j in range(1,N):
+                if nums[i][0] == 0 or nums[0][j] == 0:
                     nums[i][j] = 0
+        
+        if row:
+            for j in range(N):
+                nums[0][j] = 0
+        
+        if col:
+            for i in range(M):
+                nums[i][0] = 0
