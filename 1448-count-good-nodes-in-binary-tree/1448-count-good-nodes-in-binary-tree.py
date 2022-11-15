@@ -6,21 +6,21 @@
 #         self.right = right
 class Solution:
     def goodNodes(self, root: TreeNode) -> int:
-        def solve(root, pre=float("-inf")):
-            nonlocal count
-
+        def solve(root, mx=float("-inf")):
+            nonlocal cnt
+            
             if not root:
                 return
             
-            if root.val >= pre:
-                count+=1
+            if mx<=root.val:
+                cnt+=1
                 
-            solve(root.left, max(pre, root.val))
-            solve(root.right, max(pre, root.val))
+            solve(root.left, max(mx, root.val))
+            solve(root.right, max(mx, root.val))
             
-        
-        count = 0
+            
+        cnt = 0
         
         solve(root)
         
-        return count
+        return cnt
