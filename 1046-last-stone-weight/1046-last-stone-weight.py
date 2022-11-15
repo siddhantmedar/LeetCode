@@ -1,17 +1,20 @@
 class Solution:
     def lastStoneWeight(self, stones: List[int]) -> int:
-        lst = [-1*x for x in stones]
-        heapq.heapify(lst)
+        heap = [-x for x in stones]
         
-        while len(lst) >= 2:
-            stone1 = heapq.heappop(lst)*-1
-            stone2 = heapq.heappop(lst)*-1
+        heapq.heapify(heap)
+        
+        while heap and len(heap) >= 2:
+            stone1, stone2 = heapq.heappop(heap)*-1, heapq.heappop(heap)*-1
             
             if stone1 == stone2:
                 continue
                 
             else:
-                
-                heapq.heappush(lst, -1*abs(stone1-stone2))
-                
-        return lst[0]*-1 if lst else 0
+                diff = stone1-stone2 if stone1 > stone2 else stone2-stone1
+                heapq.heappush(heap, diff*-1)
+        
+        if heap:
+            return heap[0]*-1
+        else:
+            return 0
