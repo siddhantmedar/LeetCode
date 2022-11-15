@@ -76,4 +76,4 @@ class Solution:
         left, right = head, mid.next
         mid.next = None
         
-        return merge(left, reverse1(right))
+        return merge(left, reverse2(right))
