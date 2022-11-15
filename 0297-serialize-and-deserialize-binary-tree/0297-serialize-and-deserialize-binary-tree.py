@@ -27,7 +27,6 @@ class Codec:
         
         result = []
         dfs(root)
-        print("".join(result)[:-1])
         return "".join(result)[:-1]
         
     def deserialize(self, data):
