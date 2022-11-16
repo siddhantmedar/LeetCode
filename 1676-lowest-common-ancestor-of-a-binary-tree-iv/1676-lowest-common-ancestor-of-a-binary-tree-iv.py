@@ -7,21 +7,19 @@
 
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', nodes: 'List[TreeNode]') -> 'TreeNode':
-        def solve(root):
+        def dfs(root):
             if not root:
                 return root
-
-            if root in set(st):
+            
+            if root in nodes:
                 return root
-
-            left = solve(root.left)
-            right = solve(root.right)
-
+            
+            left = dfs(root.left)
+            right = dfs(root.right)
+            
             if left and right:
                 return root
-
+            
             return left or right
-    
-        st = set(nodes)
         
-        return solve(root)
+        return dfs(root)
