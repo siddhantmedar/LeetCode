@@ -12,50 +12,27 @@ class Solution:
             if not root:
                 return
             
-            mp[root] = mp.get(root, Node(root.val))
+            if root not in mp:
+                mp[root] = Node(root.val)
+                
+            visited.add(root)
             
-            for c in root.children:
-                if c:
-                    mp[c] = mp.get(c, Node(c.val))
+            for nei in root.children:
+                if nei not in mp:
+                    mp[nei] = Node(nei.val)
                     
-                mp[root].children.append(mp[c])
+                mp[root].children.append(mp[nei])
                 
-                dfs(c)
-                
+                if nei not in visited:
+                    dfs(nei)
             
-#         mp = {None:None}
         
-#         dfs(root)
+        if not root:
+            return None
         
-#         return mp[root]
-    
-        def bfsSolution(root):
-            def bfs(root):
-                if not root:
-                    return
-                
-                q = deque([root])
-                
-                while q:
-                    n = len(q)
-                    
-                    for k in range(n):
-                        node = q.popleft()
-                        
-                        mp[node] = mp.get(node, Node(node.val))
-                        
-                        for c in node.children:
-                            if c:
-                                mp[c] = mp.get(c, Node(c.val))
-                                q.append(c)
-                                
-                            mp[node].children.append(mp[c])
-                        
-                
-            mp = {None:None}
-            
-            bfs(root)
-            
-            return mp[root]
+        mp = {None:None}
+        visited = set()
         
-        return bfsSolution(root)
+        dfs(root)
+        
+        return mp[root]
