@@ -6,6 +6,31 @@
 #         self.right = right
 class Solution:
     def minDepth(self, root: Optional[TreeNode]) -> int:
+        def bfs(root):
+            if not root:
+                return 0
+            
+            level = 0
+            
+            q = deque([root])
+
+            while q:
+                n = len(q)
+                level+=1
+                
+                for k in range(n):
+                    node = q.popleft()
+                    
+                    if not node.left and not node.right:
+                        return level
+                    
+                    if node.left:
+                        q.append(node.left)
+                        
+                    if node.right:
+                        q.append(node.right)
+
+            
         def dfs(root,level):
             if not root:
                 return float("inf")
@@ -22,4 +47,4 @@ class Solution:
         if not root:
             return 0
         
-        return dfs(root,1)
+        return bfs(root)
