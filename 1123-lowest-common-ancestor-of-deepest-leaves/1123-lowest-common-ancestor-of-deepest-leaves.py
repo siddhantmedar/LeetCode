@@ -6,37 +6,35 @@
 #         self.right = right
 class Solution:
     def lcaDeepestLeaves(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
-        def bfs(root):           
-            q = deque([root])
-            
-            while q:
-                n = len(q)
-                tmp = []
-                for i in range(n):
-                    node = q.popleft()
-                    tmp.append(node)
-                    
-                    if node.left:
-                        q.append(node.left)
-                        
-                    if node.right:
-                        q.append(node.right)
-                        
-                lst = tmp
-            
-            return lst
+        q = deque([root])
         
-        def lca(root):
-            if not root or (root in st):
+        while q:
+            n = len(q)
+            tmp = []
+            for k in range(n):
+                node = q.popleft()
+                tmp.append(node)
+                
+                if node.left:
+                    q.append(node.left)
+                    
+                if node.right:
+                    q.append(node.right)
+        
+        
+        def dfs(root):
+            if not root:
                 return root
-
-            left = lca(root.left)
-            right = lca(root.right)
-
+            
+            if root in tmp:
+                return root
+            
+            left = dfs(root.left)
+            right = dfs(root.right)
+            
             if left and right:
                 return root
-
+            
             return left or right
-
-        st = set(bfs(root))
-        return lca(root)
+        
+        return dfs(root)
