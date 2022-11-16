@@ -8,6 +8,31 @@ class Node:
 
 class Solution:
     def cloneGraph(self, node: 'Node') -> 'Node':
+        def bfs(node):
+            mp = {None:None, node:Node(node.val)}
+            
+            visited = set([node])
+            q = deque([node])
+            
+            while q:
+                n = len(q)
+                
+                for k in range(n):
+                    nd = q.popleft()
+                    
+                    for nei in nd.neighbors:
+                        if nei not in mp:
+                            mp[nei] = Node(nei.val)
+
+                        mp[nd].neighbors.append(mp[nei])
+
+                        if nei not in visited:
+                            visited.add(nei)
+                            q.append(nei)
+                            
+            return mp[node]
+        
+        
         def dfs(node):
             if not node:
                 return
@@ -30,9 +55,4 @@ class Solution:
         if not node:
             return None
         
-        mp = {None:None}
-        visited = set()
-        
-        dfs(node)
-        
-        return mp[node]
+        return bfs(node)
