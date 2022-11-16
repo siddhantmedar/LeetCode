@@ -8,6 +8,31 @@ class Node:
 
 class Solution:
     def cloneTree(self, root: 'Node') -> 'Node':
+        def bfs(node):
+            mp = {None:None, node:Node(node.val)}
+            
+            visited = set([node])
+            q = deque([node])
+            
+            while q:
+                n = len(q)
+                
+                for k in range(n):
+                    nd = q.popleft()
+                    
+                    for nei in nd.children:
+                        if nei not in mp:
+                            mp[nei] = Node(nei.val)
+
+                        mp[nd].children.append(mp[nei])
+
+                        if nei not in visited:
+                            visited.add(nei)
+                            q.append(nei)
+                            
+            return mp[node]
+        
+        
         def dfs(root):
             if not root:
                 return
@@ -26,13 +51,7 @@ class Solution:
                 if nei not in visited:
                     dfs(nei)
             
-        
         if not root:
             return None
         
-        mp = {None:None}
-        visited = set()
-        
-        dfs(root)
-        
-        return mp[root]
+        return bfs(root)
