@@ -1,17 +1,18 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
+        def solve(idx,st):
+            nonlocal result
+            
+            if idx >= len(nums):
+                if idx == len(nums):
+                    result.append(st)
+                return
+            
+            solve(idx+1,st)
+            solve(idx+1,st+[nums[idx]])
+        
         result = []
         
-        for i in range(2**len(nums)):
-            mask = 1
-            tmp = []
-            
-            for j in range(len(nums)):
-                if i & mask > 0:
-                    tmp.append(nums[j])
-                    
-                mask<<=1
-                
-            result.append(tmp)
-            
+        solve(0,[])
+        
         return result
