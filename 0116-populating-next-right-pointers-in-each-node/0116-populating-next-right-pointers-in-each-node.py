@@ -10,53 +10,18 @@ class Node:
 
 class Solution:
     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
-        def dfs(root,level):
-            if not root:
-                return
+        curr, nxt = root, root.left if root else None
+        
+        while curr and nxt:
+            curr.left.next = curr.right
             
-            mp[level].append(root)
+            if curr.next:
+                curr.right.next = curr.next.left
+
+            curr = curr.next
             
-            dfs(root.left,level+1)
-            dfs(root.right,level+1)
-        
-        if not root:
-            return root
-        
-        mp = defaultdict(list)
-        
-        dfs(root,1)
-        
-        for _,v in mp.items():
-            for i in range(len(v)-1):
-                v[i].next = v[i+1]
+            if not curr:
+                curr = nxt
+                nxt = curr.left
                 
         return root
-        
-                
-        
-        
-        
-#         q = deque([root,"#"])
-        
-#         while q:
-#             n = len(q)
-            
-#             for _ in range(n):
-#                 node = q.popleft()
-                
-#                 if node == "#":
-#                     continue
-                
-#                 if q and q[0] != "#":
-#                     node.next = q[0]
-                    
-#                 if node.left:
-#                     q.append(node.left)
-                    
-#                 if node.right:
-#                     q.append(node.right)
-                
-#             if q:
-#                 q.append("#")
-        
-#         return root
