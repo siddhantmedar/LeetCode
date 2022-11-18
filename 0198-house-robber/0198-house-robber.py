@@ -17,7 +17,19 @@ class Solution:
             
             return dp[idx]
         
+        def solve2():
+            n = len(nums)
+            dp = [-1 for i in range(n)]
+            
+            dp[n-1] = nums[n-1]
+            
+            for i in range(len(dp)-2,-1,-1):
+                exclude = dp[i+1]
+                include = dp[i+2] if i+2 < len(dp) else 0
+                include += nums[i]
+                
+                dp[i] = max(include, exclude)
+            
+            return dp[0]
         
-        dp = [-1 for i in range(len(nums)+1)]
-        
-        return solve(0)
+        return solve2()
