@@ -2,6 +2,9 @@ class Solution:
     def rob(self, nums: List[int]) -> int:
         def solve(idx):
             if idx>=len(nums):
+                if idx == len(nums)-1:
+                    return nums[idx]
+                
                 return 0
             
             if dp[idx] != -1:
