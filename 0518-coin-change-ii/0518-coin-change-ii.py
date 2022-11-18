@@ -8,7 +8,14 @@ class Solution:
             if idx>=len(coins) or rem < 0:
                 return 0
             
-            return solve(idx+1,rem)+solve(idx,rem-coins[idx])
+            if dp[idx][rem] != -1:
+                return dp[idx][rem]
+            
+            dp[idx][rem] = solve(idx+1,rem)+solve(idx,rem-coins[idx])
+            
+            return dp[idx][rem]
         
+        
+        dp = [[-1 for _ in range(amount+1)] for _ in range(len(coins))]
         
         return solve(0,amount)
