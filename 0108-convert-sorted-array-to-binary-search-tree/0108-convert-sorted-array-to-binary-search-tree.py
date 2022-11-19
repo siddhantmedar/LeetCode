@@ -10,8 +10,8 @@ class Solution:
             if low > high:
                 return None
             
-            if low == high:
-                return TreeNode(nums[low])
+            # if low == high:
+            #     return TreeNode(nums[low])
             
             mid = (low+high)>>1
             root = TreeNode(nums[mid])
