@@ -1,14 +1,18 @@
 class Solution:
     def checkValid(self, matrix: List[List[int]]) -> bool:
-        st = set([i for i in range(1, len(matrix)+1)])
+        row, col = defaultdict(set), defaultdict(set)
         
         for i in range(len(matrix)):
-            if st != set(matrix[i]) or\
-            st != set([matrix[j][i] for j in range(len(matrix[0]))]):
+            for j in range(len(matrix[0])):
+                row[i].add(matrix[i][j])
+                col[j].add(matrix[i][j])
+                
+        for k,v in row.items():
+            if len(v) != len(matrix):
+                return False
+            
+        for k,v in col.items():
+            if len(v) != len(matrix):
                 return False
         
         return True
-    
-    
-    
-        
