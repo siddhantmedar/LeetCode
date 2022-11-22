@@ -6,7 +6,7 @@ class Solution:
             for j in range(len(matrix[0])):
                 row[i].add(matrix[i][j])
                 col[j].add(matrix[i][j])
-                
+        
         for k,v in row.items():
             if len(v) != len(matrix):
                 return False
