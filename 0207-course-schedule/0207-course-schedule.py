@@ -28,7 +28,7 @@ class Solution:
                         if indegree[nei] == 0:
                             q.append(nei)
                             
-            return cnt if cnt == len(indegree) else []
+            return True if cnt == len(indegree) else False
             
         
         def dfs(node):
