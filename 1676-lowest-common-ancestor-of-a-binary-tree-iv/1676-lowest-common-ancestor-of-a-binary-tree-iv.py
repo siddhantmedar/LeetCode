@@ -11,7 +11,7 @@ class Solution:
             if not root:
                 return root
             
-            if root in nodes:
+            if root in set(nodes):
                 return root
             
             left = dfs(root.left)
@@ -21,5 +21,6 @@ class Solution:
                 return root
             
             return left or right
+        
         
         return dfs(root)
