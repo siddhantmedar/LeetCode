@@ -22,24 +22,39 @@ class Solution:
                             visited.add(nei)
                             q.append(nei)                        
         
+        def find(x):
+            if parent[x] != x:
+                parent[x] = find(parent[x])
+                
+            return parent[x]
+        
+        def union(x,y):
+            setX,setY = find(x),find(y)
+            
+            if setX != setY:
+                parent[setY] = setX
+        
         
         if len(edges) < n-1:
             return -1
         
-        graph = defaultdict(set)
+        parent = {x:x for x in range(n)}
+        
+        # graph = defaultdict(set)
         
         for u,v in edges:
-            graph[u].add(v)
-            graph[v].add(u)
+            # graph[u].add(v)
+            # graph[v].add(u)
+            union(u,v)
             
-        visited = set()
-        cnt = 0
+        # visited = set()
+        # cnt = 0
         
-        for i in range(n):
-            if i not in visited:
-                bfs(i)
-                cnt+=1
+        # for i in range(n):
+        #     if i not in visited:
+        #         bfs(i)
+        #         cnt+=1
                 
-        return cnt-1
+        return sum([1 for k,v in parent.items() if k==v])-1
     
         #TC O(V+E)
