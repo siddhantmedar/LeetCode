@@ -24,5 +24,5 @@ class Solution:
                     
             if valid:
                 result+=len(word)
-                
+        
         return result
