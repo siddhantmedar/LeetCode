@@ -19,17 +19,50 @@ class Solution:
             visited.remove((i,j))
             return False
             
+        def solve():
+            st = deque()
+            visited = set()
+            
+            for i in range(M):
+                for j in range(N):
+                    if board[i][j] == word[0]:
+                        st.append((i,j,False,0))
+                        
+            while st:
+                i,j,backtrack,idx = st.pop()
+                
+                if backtrack:
+                    visited.remove((i,j))
+                    continue
+                    
+                if idx == len(word)-1:
+                    return True
+                
+                st.append((i,j,True,idx))
+                visited.add((i,j))
+                
+                for dx,dy in directions:
+                    dx+=i
+                    dy+=j
+                        
+                    if 0<=dx<M and 0<=dy<N and (dx,dy) not in visited and board[dx][dy] == word[idx+1]:
+                        st.append((dx,dy,False,idx+1))
+                        
+            return False
+                    
         
         M,N = len(board), len(board[0])
         directions = [(-1,0),(1,0),(0,-1),(0,1)]
         
-        for i in range(M):
-            for j in range(N):
-                if board[i][j] == word[0]:
-                    visited = set()
-                    if dfs(i,j,0):
-                        return True
+#         st = []
+#         for i in range(M):
+#             for j in range(N):
+#                 if board[i][j] == word[0]:
+#                     visited = set()
+#                     if dfs(i,j,0):
+#                         return True
                     
                     
-        return False
-    
+#         return False
+        
+        return solve()
