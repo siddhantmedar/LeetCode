@@ -8,12 +8,13 @@ class NumArray:
         for ele in nums:
             sm+=ele
             self.prefix.append(sm)
-
+        
     def sumRange(self, left: int, right: int) -> int:
         if left == 0:
             return self.prefix[right]
         
-        return self.prefix[right]-self.prefix[left-1]
+        elif left > 0:
+            return self.prefix[right]-self.prefix[left-1]
 
 
 # Your NumArray object will be instantiated and called as such:
