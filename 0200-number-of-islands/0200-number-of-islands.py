@@ -14,9 +14,11 @@ class Solution:
             if setX != setY:
                 if size[setX] >= size[setY]:
                     parent[setY] = setX
+                    size[setX]+=size[setY]
                 
                 elif size[setX] < size[setY]:
                     parent[setX] = setY
+                    size[setY]+=size[setX]
         
             
         M,N = len(grid),len(grid[0])
