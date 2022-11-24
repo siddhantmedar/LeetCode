@@ -1,5 +1,5 @@
 class Solution:
-    def canFinish(self, n: int, prerequisites: List[List[int]]) -> bool:
+    def canFinish(self, n: int, edges: List[List[int]]) -> bool:
         def dfs(node):
             visited.add(node)
             rec.add(node)
@@ -8,31 +8,30 @@ class Solution:
                 if nei not in visited:
                     if not dfs(nei):
                         return False
-                    
+            
                 elif nei in rec:
                     return False
-                    
-            st.append(node)
+                
             rec.remove(node)
+            st.appendleft(node)
             
             return True
             
+            
+        graph = defaultdict(set)
         
-        graph = defaultdict(list)
-        
-        for u,v in prerequisites:
-            graph[v].append(u)
-        
+        for u,v in edges:
+            graph[v].add(u)
+            
         visited = set()
         rec = set()
-        st = []
+        st = deque()
         
         for i in range(n):
             if i not in visited:
                 if not dfs(i):
                     return False
                 
-        print(st)
+        # print(st)
         
         return True
-        
