@@ -7,6 +7,21 @@ class Solution:
                 if nei not in visited:
                     dfs(nei)
         
+        def bfs(node):
+            q = deque([node])
+            visited.add(node)
+            
+            while q:
+                n = len(q)
+                
+                for _ in range(n):
+                    node = q.popleft()
+                    
+                    for nei in graph[node]:
+                        if nei not in visited:
+                            visited.add(nei)
+                            q.append(nei)                        
+        
         
         if len(edges) < n-1:
             return -1
@@ -22,7 +37,9 @@ class Solution:
         
         for i in range(n):
             if i not in visited:
-                dfs(i)
+                bfs(i)
                 cnt+=1
                 
         return cnt-1
+    
+        #TC O(V+E)
