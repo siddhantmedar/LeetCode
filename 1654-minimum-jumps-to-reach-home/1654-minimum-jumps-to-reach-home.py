@@ -19,7 +19,7 @@ class Solution:
                     return level
                 
                 next_pos = idx+a
-                if next_pos not in forbidden and next_pos < 6000 and (next_pos,False) not in visited:
+                if next_pos not in forbidden and next_pos < 10000 and (next_pos,False) not in visited:
                     visited.add((next_pos,False))
                     q.append((next_pos,False))
                 
