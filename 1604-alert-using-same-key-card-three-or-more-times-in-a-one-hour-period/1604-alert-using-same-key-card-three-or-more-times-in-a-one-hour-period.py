@@ -35,3 +35,5 @@ class Solution:
         result.sort()
         
         return result
+    
+    # O(no.of names*NlogN + no.of names*N + NlogN)
