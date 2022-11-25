@@ -15,7 +15,8 @@ class Solution:
                 
                 sign = 1
                 res = 0
-                
+                op = 0
+            
             elif c == ")":
                 res+=op*sign
                 res*=st.pop()
