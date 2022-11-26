@@ -20,4 +20,8 @@ class Solution:
             
             mp[ppid[i]].add(pid[i])
             
-        return list(buildPath(mp,kill))
+        result = list(buildPath(mp,kill))
+        
+        print(result)
+        
+        return result
