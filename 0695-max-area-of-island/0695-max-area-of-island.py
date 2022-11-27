@@ -10,9 +10,6 @@ class Solution:
                 for _ in range(n):
                     i,j = q.popleft()
                     
-                    if i<0 or i>=M or j<0 or j>=N or grid[i][j] == 0:
-                        continue
-                    
                     grid[i][j] = 0
                     
                     cnt += 1
@@ -21,25 +18,10 @@ class Solution:
                         dx+=i
                         dy+=j
                         
-                        q.append((dx,dy))
+                        if 0<=dx<M and 0<=dy<N and grid[dx][dy] == 1:
+                            grid[dx][dy]=0
+                            q.append((dx,dy))
             
-            return cnt
-                    
-                            
-        def dfs(i,j):
-            if i<0 or i>=M or j<0 or j>=N or grid[i][j] == 0:
-                return 0
-            
-            grid[i][j] = 0
-            
-            cnt = 1
-            
-            for dx,dy in directions:
-                dx+=i
-                dy+=j
-                
-                cnt+=dfs(dx,dy)
-                
             return cnt
         
         
