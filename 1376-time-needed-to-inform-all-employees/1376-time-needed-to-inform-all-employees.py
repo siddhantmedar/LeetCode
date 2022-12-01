@@ -1,29 +1,21 @@
 class Solution:
     def numOfMinutes(self, n: int, headID: int, manager: List[int], informTime: List[int]) -> int:
-        def dfs(node, time, par=None):
-            nonlocal res
-            
+        def dfs(node, t):
             visited.add(node)
             
-            if len(graph[node]) == 1 and par in graph[node]:
-                res = max(res, time)
+            res = t
             
             for nei in graph[node]:
-                if nei not in visited:
-                    dfs(nei, time+informTime[node], node)
+                res=max(res,dfs(nei,t+informTime[node]))
+            
+            return res
         
-        graph = defaultdict(list)
+        
+        graph = defaultdict(set)
+        
+        for i in range(len(manager)):
+            graph[manager[i]].add(i)
+        
         visited = set()
         
-        for i, node in enumerate(manager):
-            if node == -1:
-                continue
-            
-            graph[i].append(node)
-            graph[node].append(i)
-            
-        res = 0
-        
-        dfs(headID, 0)
-        
-        return res
+        return dfs(headID,0)
