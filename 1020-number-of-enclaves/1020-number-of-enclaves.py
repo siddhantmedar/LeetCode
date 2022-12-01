@@ -1,17 +1,26 @@
 class Solution:
     def numEnclaves(self, grid: List[List[int]]) -> int:
-        def dfs(i,j):
-            if i<0 or i>=M or j<0 or j>=N or (i,j) in visited or grid[i][j]==0:
-                return
-            
+        def bfs(i,j):
             visited.add((i,j))
             
-            for dx,dy in directions:
-                dx+=i
-                dy+=j
-                
-                dfs(dx,dy)
+            q = deque([(i,j)])
             
+            while q:
+                n = len(q)
+                
+                for _ in range(n):
+                    i,j = q.popleft()
+                    
+                    for dx,dy in directions:
+                        dx+=i
+                        dy+=j
+                            
+                        if dx<0 or dx>=M or dy<0 or dy>=N or (dx,dy) in visited or grid[dx][dy]==0:
+                            continue
+                        
+                        visited.add((dx,dy))
+                        q.append((dx,dy))
+        
         
         M,N = len(grid),len(grid[0])
         directions = [(-1,0),(1,0),(0,-1),(0,1)]
@@ -21,15 +30,15 @@ class Solution:
         
         for j in range(N):
             if (0,j) not in visited and grid[0][j] == 1:
-                dfs(0,j)
+                bfs(0,j)
             if (M-1,j) not in visited and grid[M-1][j] == 1:
-                dfs(M-1,j)
+                bfs(M-1,j)
         
         for i in range(M):
             if (i,0) not in visited and grid[i][0] == 1:
-                dfs(i,0)
+                bfs(i,0)
             if (i,N-1) not in visited and grid[i][N-1] == 1:
-                dfs(i,N-1)
+                bfs(i,N-1)
         
         for i in range(M):
             for j in range(N):
