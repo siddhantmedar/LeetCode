@@ -1,35 +1,39 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        def bfs(i,j):
-            q = deque([(i,j)])
-            
-            while q:
-                n = len(q)
+        def find(x,y):
+            if parent[(x,y)] != (x,y):
+                parent[(x,y)] = find(parent[(x,y)][0],parent[(x,y)][1])
                 
-                for _ in range(n):
-                    i,j = q.popleft()
-                    
-                    grid[i][j] = "0"
-                    
-                    for dx,dy in directions:
-                        dx+=i
-                        dy+=j
-                        
-                        if dx<0 or dx>=M or dy<0 or dy>=N or grid[dx][dy] == "0":
-                            continue
-                        grid[dx][dy] = "0"
-                        q.append((dx,dy))
+            return parent[(x,y)]
         
+        def union(i,j,x,y):
+            setX = find(i,j)
+            setY = find(x,y)
             
+            if setX != setY:
+                if size[setX] >= size[setY]:
+                    parent[setY] = setX
+                    size[setX]+=size[setY]
+                    
+                else:
+                    parent[setX] = setY
+                    size[setY]+=size[setX]
+                    
+        
         M,N = len(grid),len(grid[0])
         directions = [(-1,0),(1,0),(0,-1),(0,1)]
         
-        cnt = 0
+        parent = {(i,j):(i,j) for i in range(M) for j in range(N) if grid[i][j] == "1"}
+        size = {(i,j):1 for i in range(M) for j in range(N) if grid[i][j] == "1"}
         
         for i in range(M):
             for j in range(N):
                 if grid[i][j] == "1":
-                    bfs(i,j)
-                    cnt+=1
-                    
-        return cnt
+                    for dx,dy in directions:
+                        dx+=i
+                        dy+=j
+                        
+                        if 0<=dx<M and 0<=dy<N and grid[dx][dy] == "1":
+                            union(i,j,dx,dy)
+        
+        return sum([1 for k,v in parent.items() if k==v])
