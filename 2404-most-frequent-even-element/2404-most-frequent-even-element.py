@@ -3,15 +3,17 @@ class Solution:
         mp = {}
         
         for ele in nums:
-            if not ele%2:
-                mp[ele] = 1+mp.get(ele, 0)
+            mp[ele]=1+mp.get(ele,0)
+        
+        mx = float("-inf")
+        result = None
+        
+        for k,v in mp.items():
+            if k%2==0 and v > mx:
+                result = k
+                mx = v
                 
-        heap = [(-v,k) for k,v in mp.items() if not k%2]
+            elif k%2==0 and (v==mx and k < result):
+                result = k
         
-        if heap:
-            heapq.heapify(heap)
-            
-            return heap[0][1]
-        
-        else:
-            return -1
+        return result if result != None else -1
