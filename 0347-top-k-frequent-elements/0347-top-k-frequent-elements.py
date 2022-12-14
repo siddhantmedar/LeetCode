@@ -5,6 +5,4 @@ class Solution:
         for ele in nums:
             mp[ele]=1+mp.get(ele,0)
         
-        result = sorted([(k,v) for k,v in mp.items()],key=lambda x:-x[1])[:K]
-        
-        return [x[0] for x in result]
+        return [x[0] for x in sorted([(k,v) for k,v in mp.items()],key=lambda x:-x[1])[:K]]
