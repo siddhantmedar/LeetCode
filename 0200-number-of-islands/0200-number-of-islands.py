@@ -15,20 +15,21 @@ class Solution:
                         dx+=i
                         dy+=j
                         
-                        if 0<=dx<M and 0<=dy<N and grid[dx][dy] == "1":
-                            grid[dx][dy] = "0"
-                            q.append((dx,dy))
-                    
+                        if dx<0 or dx>=M or dy<0 or dy>=N or grid[dx][dy] == "0":
+                            continue
+                        grid[dx][dy] = "0"
+                        q.append((dx,dy))
+        
             
         M,N = len(grid),len(grid[0])
         directions = [(-1,0),(1,0),(0,-1),(0,1)]
         
-        result = 0
+        cnt = 0
         
         for i in range(M):
             for j in range(N):
                 if grid[i][j] == "1":
-                    result+=1
                     bfs(i,j)
+                    cnt+=1
                     
-        return result
+        return cnt
