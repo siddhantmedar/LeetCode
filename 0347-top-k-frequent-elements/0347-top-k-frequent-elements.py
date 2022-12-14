@@ -4,11 +4,7 @@ class Solution:
         
         for ele in nums:
             mp[ele]=1+mp.get(ele,0)
-            
-        print(mp)
         
-        mp = dict(sorted(mp.items(),key=lambda x:-x[1]))
+        result = sorted([(k,v) for k,v in mp.items()],key=lambda x:-x[1])[:K]
         
-        print(mp)
-        
-        return [k for k,v in mp.items()][:K]
+        return [x[0] for x in result]
