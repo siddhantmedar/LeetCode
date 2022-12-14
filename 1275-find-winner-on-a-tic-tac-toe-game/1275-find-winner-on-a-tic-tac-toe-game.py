@@ -40,3 +40,8 @@ class Solution:
             return "B"
         
         return "Draw" if empty==0 else "Pending"
+    
+#     Time=O(N**2 + 8*N)
+#     Space=O(N**2)
+    
+#     In this case,N=3 so TC and SC could be constant
