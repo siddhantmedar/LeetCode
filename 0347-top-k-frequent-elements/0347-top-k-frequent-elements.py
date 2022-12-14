@@ -5,4 +5,21 @@ class Solution:
         for ele in nums:
             mp[ele]=1+mp.get(ele,0)
         
-        return [x[0] for x in sorted([(k,v) for k,v in mp.items()],key=lambda x:-x[1])[:K]]
+        box = [set() for _ in range(len(nums)+1)]
+        
+        for k,v in mp.items():
+            box[v].add(k)
+            
+        result = []
+        
+        for i in range(len(box)-1,-1,-1):
+            curr = box[i]
+            
+            if curr:
+                for ele in curr:
+                    if K == 0:
+                        break
+                    result.append(ele)
+                    K-=1
+                    
+        return result
