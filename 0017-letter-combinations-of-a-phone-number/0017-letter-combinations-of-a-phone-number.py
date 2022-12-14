@@ -2,18 +2,20 @@ class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
         def solve(idx,path):
             if idx == len(digits):
-                if path:
-                    result.append(path[:])
+                result.append(path)
                 return
             
-            s = mp[digits[idx]]
+            curr = mp[digits[idx]]
             
-            for c in s:
+            for c in curr:
                 solve(idx+1,path+c)
-        
+            
         
         mp = {"2": "abc", "3": "def", "4": "ghi", "5": "jkl", 
            "6": "mno", "7": "pqrs", "8": "tuv", "9": "wxyz"}
+        
+        if not digits:
+            return []
         
         result = []
         
