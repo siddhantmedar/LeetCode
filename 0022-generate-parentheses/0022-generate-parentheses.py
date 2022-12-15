@@ -1,7 +1,7 @@
 class Solution:
     def generateParenthesis(self, n: int) -> List[str]:
         def solve(open,close,path):
-            if len(path) == 2*n:
+            if open+close == 2*n:
                 result.append(path)
                 return
             
@@ -9,9 +9,9 @@ class Solution:
                 solve(open+1,close,path+"(")
                 
             if close < open:
-                solve(open,close+1,path+")")
-                
-                
+                solve(open,close+1, path+")")
+            
+        
         result = []
         
         solve(0,0,"")
