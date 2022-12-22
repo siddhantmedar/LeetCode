@@ -9,14 +9,16 @@ class Solution:
             
             if idx in days:
                 dp[idx] = min(
-                solve(idx+1)+cost[0],
-                solve(idx+7)+cost[1],
-                solve(idx+30)+cost[2]
+                    solve(idx+1)+cost[0],
+                    solve(idx+7)+cost[1],
+                    solve(idx+30)+cost[2]
                 )
+                
                 return dp[idx]
             
             else:
                 dp[idx] = solve(idx+1)
+                
                 return dp[idx]
             
         
