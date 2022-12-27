@@ -16,14 +16,15 @@ public:
             }
         }
         
-        vector<pair<int,int>> tmp;
+        // vector<pair<int,int>> tmp;
+        multimap<int,int,greater<int>> tmp;
         
         for(auto it:mp)
         {
-            tmp.emplace_back(make_pair(it.first,it.second));
+            tmp.insert(make_pair(it.second,it.first));
         }
         
-        sort(begin(tmp),end(tmp),cmp);
+        // sort(begin(tmp),end(tmp),cmp);
         
         vector<int> result;
         
@@ -31,7 +32,8 @@ public:
             if(result.size() == k){
                 break;
             }
-            result.emplace_back(x.first);
+            result.emplace_back(x.second);
+            // cout<<x.first<<" "<<x.second<<endl;
         }
         return result;
     }
