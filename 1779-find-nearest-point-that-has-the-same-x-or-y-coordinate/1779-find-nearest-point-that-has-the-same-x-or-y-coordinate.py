@@ -1,17 +1,22 @@
 class Solution:
     def nearestValidPoint(self, x: int, y: int, points: List[List[int]]) -> int:
-        res = float("inf")
-        res_idx = None
+        idx = None
+        dist = float("inf")
         
-        for idx, p in enumerate(points):
-            i, j = p[0], p[1]
+        for idxx,(i,j) in enumerate(points):
+            
+            if (i,j) == (x,y):
+                return idxx
             
             if i == x or j == y:
-                if abs(i-x)+abs(j-y) < res:
-                    res = abs(i-x)+abs(j-y)
-                    res_idx = idx
-                        
-                elif abs(i-x)+abs(j-y) == res:
-                    res_idx = min(res_idx, idx)
+                tmp = abs(x-i)+abs(y-j)
+
+                if tmp < dist:
+                    dist = tmp
+                    idx = idxx
+
+                elif tmp == dist and idxx < idx:
+                    idx = idxx
+                    dist = tmp
         
-        return res_idx if res_idx  != None else -1
+        return idx if idx != None else -1
