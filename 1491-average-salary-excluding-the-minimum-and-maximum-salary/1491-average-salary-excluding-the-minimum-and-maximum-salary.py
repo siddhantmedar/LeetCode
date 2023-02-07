@@ -1,12 +1,12 @@
 class Solution:
     def average(self, salary: List[int]) -> float:
-        mx, mn = max(salary), min(salary)
+        mn = float("inf")
+        mx = float("-inf")
         
-        sm, count = 0, 0
-        
-        for s in salary:
-            if s != mx and s != mn:
-                sm+=s
-                count+=1
+        for sal in salary:
+            if mn > sal:
+                mn = sal
+            if mx < sal:
+                mx = sal
                 
-        return sm/count
+        return (sum(salary)-mn-mx)/(len(salary)-2)
