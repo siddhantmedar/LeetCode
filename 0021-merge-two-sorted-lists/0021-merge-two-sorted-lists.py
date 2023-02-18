@@ -4,7 +4,7 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+    def mergeTwoLists(self, l: Optional[ListNode], r: Optional[ListNode]) -> Optional[ListNode]:
         def merge(l,r):
             if not l:
                 return r
@@ -12,31 +12,30 @@ class Solution:
             if not r:
                 return l
             
-            dummy = ListNode(-1)
+            dummy = ListNode(-1001)
             tmp = dummy
             
             while l and r:
                 if l.val <= r.val:
-                    dummy.next = l
+                    tmp.next = l
                     l = l.next
-                    dummy = dummy.next
+                    tmp = tmp.next
                     
-                elif l.val > r.val:
-                    dummy.next = r
+                else:
+                    tmp.next = r
                     r = r.next
-                    dummy = dummy.next
-                    
+                    tmp = tmp.next
                     
             while l:
-                dummy.next = l
+                tmp.next = l
                 l = l.next
-                dummy = dummy.next
+                tmp = tmp.next
                 
             while r:
-                dummy.next = r
-                r = r.next 
-                dummy = dummy.next
+                tmp.next = r
+                r = r.next
+                tmp = tmp.next
                 
-            return tmp.next
-        
-        return merge(list1, list2)
+            return dummy.next
+            
+        return merge(l,r)
