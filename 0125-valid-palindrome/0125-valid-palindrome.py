@@ -1,24 +1,20 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        def check(word):
-            low, high = 0, len(word)-1
-            
-            while low < high:
-                if word[low] != word[high]:
-                    return False
-                
-                low+=1
-                high-=1
-                
-            return True
-            
-            
-        text = ""
+        t = ""
         
         for c in s:
             if c.isalnum():
-                text+=c.lower()
-
-        # print(text)
+                t+=c.lower()
+          
+        # print(t)
         
-        return check(text)
+        low, high = 0, len(t)-1
+        
+        while low<high:
+            if t[low] != t[high]:
+                return False
+            
+            low+=1
+            high-=1
+            
+        return True
