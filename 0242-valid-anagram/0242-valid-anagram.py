@@ -1,9 +1,6 @@
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        if len(s) != len(t):
-            return False
-        
-        mp = dict()
+        mp = {}
         
         for c in s:
             mp[c]=1+mp.get(c,0)
@@ -14,7 +11,8 @@ class Solution:
             
             mp[c]-=1
             
-            if mp[c]==0:
+            if mp[c] == 0:
                 del mp[c]
+                
                 
         return True if not mp else False
