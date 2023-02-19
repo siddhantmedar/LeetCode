@@ -1,12 +1,12 @@
 class Solution:
-    def maxProfit(self, nums: List[int]) -> int:
-        stock = nums[0]
+    def maxProfit(self, prices: List[int]) -> int:
+        held = prices[0]
         profit = 0
         
-        for ele in nums[1:]:
-            if ele < stock:
-                stock = ele                
-            else:
-                profit = max(profit, ele-stock)
-        
+        for ele in prices[1:]:
+            if ele-held > profit:
+                profit = ele-held
+            elif held > ele:
+                held = ele
+                
         return profit
