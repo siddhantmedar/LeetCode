@@ -3,11 +3,11 @@ class Solution:
         mp = defaultdict(list)
         
         for word in strs:
-            container = [0]*26
+            ch = [0]*26
             
             for c in word:
-                container[ord(c)-ord('a')]+=1
-                
-            mp[tuple(container)].append(word)
-        
-        return [v for _, v in mp.items()]
+                ch[ord(c)-ord('a')]+=1
+            
+            mp[tuple(ch)].append(word)
+            
+        return [v for k,v in mp.items()]
