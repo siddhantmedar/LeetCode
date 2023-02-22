@@ -10,9 +10,9 @@ class Solution:
             if not p and not q:
                 return True
             
-            if (p and not q) or (not p and q):
+            if (not p and q) or (p and not q):
                 return False
             
-            return p.val == q.val and check(p.left, q.right) and check(p.right, q.left)
+            return p.val==q.val and check(p.left,q.right) and check(p.right,q.left)
         
-        return check(root, root)
+        return check(root,root)
