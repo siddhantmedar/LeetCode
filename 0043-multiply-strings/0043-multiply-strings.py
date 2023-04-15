@@ -1,33 +1,42 @@
 class Solution:
     def multiply(self, num1: str, num2: str) -> str:
-        result = deque([0]*(len(num1)+len(num2)))
+        p1,p2 = len(num1), len(num2)
         
-        ptr = len(result)-1
+        res = [0 for _ in range(p1+p2)]
+        
+        ptr = len(res)
         carry = 0
         
         for j in range(len(num2)-1,-1,-1):
-            k = ptr
+            ptr-=1
+            tmp = ptr
+            
             for i in range(len(num1)-1,-1,-1):
-                ans = int(num2[j])*int((num1[i])) + carry
+                a = int(num2[j])
+                b = int(num1[i])
                 
-                carry = ans//10
+                sm = a*b + carry + res[tmp]
                 
-                val = result[k]+(ans%10)
-                result[k] = val%10
-                carry += val//10
+                carry = sm // 10
+                res[tmp] = sm %10
                 
-                k-=1
+                tmp-=1
                 
             if carry:
-                result[k] += carry
+                res[tmp] = carry
                 carry = 0
                 
-            ptr-=1
+        print(res)
         
-        while result and result[0] == 0:
-            result.popleft()
+        res = "".join([str(x) for x in res])
+        
+        idx = 0 
+        
+        while idx < len(res) and res[idx] == "0":
+            idx+=1
             
-        if not result:
+        if idx == len(res):
             return "0"
         
-        return "".join([str(x) for x in result])
+        return res[idx:]
+                
