@@ -6,8 +6,8 @@ class Solution:
             if p>cap:
                 return False
         
-        for p,t,f in trips:
-            for i in range(t,f):
+        for p,s,d in trips:
+            for i in range(s,d):
                 lst[i]+=p
                 if lst[i] > cap:
                     return False
