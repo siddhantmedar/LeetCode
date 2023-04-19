@@ -12,23 +12,33 @@ class Solution:
     def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
         def solve(root):
             if not root:
-                return 
+                return
             
-            curr = root
-            nxt = curr.left
+            q = deque([root,"#"])
             
-            while curr and nxt:
-                curr.left.next = curr.right
+            while q:
+                n = len(q)
                 
-                if curr.next:
-                    curr.right.next = curr.next.left
+                for _ in range(n):
+                    node = q.popleft()
+                    if node=="#":
+                        continue
+                    
+                    if q and q[0] != "#":
+                        node.next = q[0]
+                    
+                    if node.left:
+                        q.append(node.left)
+                        
+                    if node.right:
+                        q.append(node.right)
                 
-                curr = curr.next
-                
-                if not curr:
-                    curr = nxt
-                    nxt = curr.left
-            
+                if q:
+                    q.append("#")
+                print(q)
+            return root
+        
         solve(root)
         
         return root
+                            
