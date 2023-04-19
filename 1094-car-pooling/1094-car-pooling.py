@@ -2,7 +2,7 @@ class Solution:
     def carPooling(self, trips: List[List[int]], cap: int) -> bool:
         lst = [0 for _ in range(1001)]
         pre = None
-        trips.sort(key=lambda x:(x[1],x[2]))
+
         for p,_,_ in trips:
             if p>cap:
                 return False
