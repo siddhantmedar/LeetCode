@@ -1,19 +1,43 @@
-class Solution:
-    def topKFrequent(self, words: List[str], K: int) -> List[str]:
-        mp = {}
+class Solution {
+public:
+      static bool cmp(pair<int,string> &p1, pair<int,string> &p2){
+        if(p1.first == p2.first)
+            return p1.second < p2.second;
+          
+        return p1.first > p2.first;        
+    }
+    
+    vector<string> topKFrequent(vector<string>& words, int k) {
+        unordered_map<string,int> mp;
         
-        for w in words:
-            mp[w]=1+mp.get(w,0)
+        for(auto &w: words){
+            if(mp.find(w) == mp.end())
+                mp[w] = 1;
+            else
+                mp[w]+=1;
+        }
         
-        heap = []
+        vector<pair<int, string>> tmp;
         
-        for k, v in mp.items():
-            heapq.heappush(heap,(-v,k))
-            
-        res = []
+        for(auto &t: mp){
+            tmp.emplace_back(make_pair(t.second, t.first));
+        }
         
-        while K:
-            res.append(heapq.heappop(heap)[1]*1)
-            K-=1
-            
-        return res
+        sort(begin(tmp), end(tmp), cmp);
+        
+        vector<string> res;
+        
+        for(auto &x: tmp){
+            cout<<x.second <<" ";
+        }
+        cout<<endl;
+        
+        for(auto &x: tmp){
+            res.emplace_back(x.second);
+            k-=1;
+            if(k==0) break;
+        }
+        
+        return res;
+    }
+};
