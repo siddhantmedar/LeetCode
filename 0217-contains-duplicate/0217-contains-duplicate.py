@@ -5,7 +5,6 @@ class Solution:
         for ele in nums:
             if ele in st:
                 return True
-            
             st.add(ele)
             
         return False
