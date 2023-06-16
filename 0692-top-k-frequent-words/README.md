@@ -5,18 +5,18 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input:</strong> words = ["i","love","leetcode","i","love","coding"], k = 2
+<pre style="position: relative;"><strong>Input:</strong> words = ["i","love","leetcode","i","love","coding"], k = 2
 <strong>Output:</strong> ["i","love"]
 <strong>Explanation:</strong> "i" and "love" are the two most frequent words.
 Note that "i" comes before "love" due to a lower alphabetical order.
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre><strong>Input:</strong> words = ["the","day","is","sunny","the","the","the","sunny","is","is"], k = 4
+<pre style="position: relative;"><strong>Input:</strong> words = ["the","day","is","sunny","the","the","the","sunny","is","is"], k = 4
 <strong>Output:</strong> ["the","is","sunny","day"]
 <strong>Explanation:</strong> "the", "is", "sunny" and "day" are the four most frequent words, with the number of occurrence being 4, 3, 2 and 1 respectively.
-</pre>
+<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
