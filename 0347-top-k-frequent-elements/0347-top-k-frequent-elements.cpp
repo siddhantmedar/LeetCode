@@ -1,40 +1,38 @@
 class Solution {
 public:
-    static bool cmp(pair<int,int> &a, pair<int,int> &b){
-            return a.second > b.second;
-        }
+     static bool cmp(pair<int,int> &p1, pair<int,int> &p2){
+        if(p1.first == p2.first)
+            return p1.second < p2.second;
+          
+        return p1.first > p2.first;        
+    }
     
     vector<int> topKFrequent(vector<int>& nums, int k) {
         unordered_map<int,int> mp;
         
-        for(auto ele:nums){
-            if(mp.find(ele)==mp.end()){
-                mp.insert(pair<int,int>(ele,1));
-            }
-            else{
-                mp[ele]+=1;
-            }
+        for(auto &w: nums){
+            if(mp.find(w) == mp.end())
+                mp[w] = 1;
+            else
+                mp[w]+=1;
         }
         
-        // vector<pair<int,int>> tmp;
-        multimap<int,int,greater<int>> tmp;
+        vector<pair<int, int>> tmp;
         
-        for(auto it:mp)
-        {
-            tmp.insert(make_pair(it.second,it.first));
+        for(auto &t: mp){
+            tmp.emplace_back(make_pair(t.second, t.first));
         }
         
-        // sort(begin(tmp),end(tmp),cmp);
+        sort(begin(tmp), end(tmp), cmp);
         
-        vector<int> result;
+        vector<int> res;
         
-        for(auto x:tmp){
-            if(result.size() == k){
-                break;
-            }
-            result.emplace_back(x.second);
-            // cout<<x.first<<" "<<x.second<<endl;
+        for(auto &x: tmp){
+            res.emplace_back(x.second);
+            k-=1;
+            if(k==0) break;
         }
-        return result;
+        
+        return res;
     }
 };
