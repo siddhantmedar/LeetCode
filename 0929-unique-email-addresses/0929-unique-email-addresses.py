@@ -5,10 +5,7 @@ class Solution:
         
         for m in emails:
             local, domain = m.split("@")
-            local = local.split("+")[0]
-            local = local.split(".")
-            local = "".join(local)
-            
+            local = "".join((local.split("+")[0]).split("."))
             mail = local+"@"+domain
             
             if mail not in seen:
