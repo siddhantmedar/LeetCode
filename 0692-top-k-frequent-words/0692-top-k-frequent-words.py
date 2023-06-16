@@ -1,43 +1,12 @@
-class Solution {
-public:
-      static bool cmp(pair<int,string> &p1, pair<int,string> &p2){
-        if(p1.first == p2.first)
-            return p1.second < p2.second;
-          
-        return p1.first > p2.first;        
-    }
-    
-    vector<string> topKFrequent(vector<string>& words, int k) {
-        unordered_map<string,int> mp;
+class Solution:
+    def topKFrequent(self, words: List[str], k: int) -> List[str]:
+        mp = dict()
         
-        for(auto &w: words){
-            if(mp.find(w) == mp.end())
-                mp[w] = 1;
-            else
-                mp[w]+=1;
-        }
+        for ele in words:
+            mp[ele] = 1+mp.get(ele,0)
+            
+        lst = sorted(mp.items(),key=lambda x:(-x[1],x[0]))
         
-        vector<pair<int, string>> tmp;
-        
-        for(auto &t: mp){
-            tmp.emplace_back(make_pair(t.second, t.first));
-        }
-        
-        sort(begin(tmp), end(tmp), cmp);
-        
-        vector<string> res;
-        
-        for(auto &x: tmp){
-            cout<<x.second <<" ";
-        }
-        cout<<endl;
-        
-        for(auto &x: tmp){
-            res.emplace_back(x.second);
-            k-=1;
-            if(k==0) break;
-        }
-        
-        return res;
-    }
-};
+        return [x[0] for x in lst][:k]
+        # nlogn
+        # n+klogn
