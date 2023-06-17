@@ -17,16 +17,15 @@ public:
     }
     
     void bfs(vector<vector<char>> &grid, int i, int j, int m, int n){
-        vector<pair<int,int>> dir = {{-1,0},{1,0},{0,-1},{0,1}};
         queue<pair<int,int>> q;
         
-        q.push(make_pair(i, j));
+        q.push({i, j});
         grid[i][j] = '0';
         
         while(!q.empty()){
-            int n = q.size();
+            int size = q.size();
             
-            for(int i=0;i<n;i++){
+            for(int i=0;i<size;i++){
                 pair<int,int> loc = q.front();
                 q.pop();
                 
@@ -52,7 +51,8 @@ public:
         for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 if(grid[i][j]=='1'){
-                    dfs(grid,i,j,m,n);
+                    cout<<i<<" "<<j<<endl;
+                    bfs(grid,i,j,m,n);
                     cnt+=1;
                 }
             }
