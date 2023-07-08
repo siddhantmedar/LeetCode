@@ -5,24 +5,24 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre style="position: relative;"><strong>Input:</strong> letters = ["c","f","j"], target = "a"
+<pre><strong>Input:</strong> letters = ["c","f","j"], target = "a"
 <strong>Output:</strong> "c"
 <strong>Explanation:</strong> The smallest character that is lexicographically greater than 'a' in letters is 'c'.
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre style="position: relative;"><strong>Input:</strong> letters = ["c","f","j"], target = "c"
+<pre><strong>Input:</strong> letters = ["c","f","j"], target = "c"
 <strong>Output:</strong> "f"
 <strong>Explanation:</strong> The smallest character that is lexicographically greater than 'c' in letters is 'f'.
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p><strong class="example">Example 3:</strong></p>
 
-<pre style="position: relative;"><strong>Input:</strong> letters = ["x","x","y","y"], target = "z"
+<pre><strong>Input:</strong> letters = ["x","x","y","y"], target = "z"
 <strong>Output:</strong> "x"
 <strong>Explanation:</strong> There are no characters in letters that is lexicographically greater than 'z' so we return letters[0].
-<div class="open_grepper_editor" title="Edit &amp; Save To Grepper"></div></pre>
+</pre>
 
 <p>&nbsp;</p>
 <p><strong>Constraints:</strong></p>
