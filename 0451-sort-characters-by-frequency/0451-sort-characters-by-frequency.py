@@ -3,15 +3,15 @@ class Solution:
         mp = {}
         
         for c in s:
-            mp[c] = 1+mp.get(c,0)
+            mp[c]=1+mp.get(c,0)
             
-        mp = dict(sorted(mp.items(), key=lambda x:-x[1]))
+        mp = sorted(mp.items(),key=lambda x:(-x[1]))
         
-        result = ""
+        res = ""
         
-        for k,v in mp.items():
+        for k,v in mp:
             while v:
-                result+=k
+                res+=k
                 v-=1
                 
-        return result
+        return res
