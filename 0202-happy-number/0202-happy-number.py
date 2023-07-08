@@ -1,20 +1,21 @@
 class Solution:
     def isHappy(self, n: int) -> bool:
-        st = set()
-        
-        while n != 1:
-            tmp = 0
+        def sod(n):
+            res = 0
             
             while n:
-                tmp+=(n%10)**2
+                res+=(n%10)**2
+                
                 n//=10
                 
-            n = tmp
-            
-            if n in st:
+            return res
+        
+        seen = set()
+        
+        while True:
+            n = sod(n)
+            if n in seen or n==1:
                 break
-            
-            st.add(n)
+            seen.add(n)
             
         return True if n==1 else False
-            
