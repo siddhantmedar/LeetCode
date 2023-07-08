@@ -1,8 +1,7 @@
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        xor = 0
-        
+        res = 0
         for ele in nums:
-            xor^=ele
+            res^=ele
             
-        return xor
+        return res
