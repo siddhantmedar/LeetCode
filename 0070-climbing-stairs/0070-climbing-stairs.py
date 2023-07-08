@@ -4,22 +4,14 @@ class Solution:
             if n==0 or n==1:
                 return 1
             
-            if dp[n] != -1: return dp[n]
+            if dp[n] != -1:
+                return dp[n]
             
             dp[n] = solve(n-1)+solve(n-2)
             
             return dp[n]
         
+        dp = [-1 for _ in range(n+1)]
         
-        # dp = [-1]*(n+1)
+        return solve(n)
         
-        # return solve(n)
-        
-        a,b=1,1
-        
-        for _ in range(n-1):
-            c = a+b
-            a=b
-            b=c
-        
-        return b
