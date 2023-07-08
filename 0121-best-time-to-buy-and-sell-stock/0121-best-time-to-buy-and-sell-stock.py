@@ -1,12 +1,12 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        held = prices[0]
-        profit = 0
+        buy = prices[0]
+        res = 0
         
-        for ele in prices[1:]:
-            if ele-held > profit:
-                profit = ele-held
-            elif held > ele:
-                held = ele
+        for i,sell in enumerate(prices[1:]):
+            if sell > buy:
+                res = max(res, sell-buy)
+            else:
+                buy = min(buy, sell)
                 
-        return profit
+        return res
