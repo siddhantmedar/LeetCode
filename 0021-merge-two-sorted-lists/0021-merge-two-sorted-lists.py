@@ -4,38 +4,40 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    def mergeTwoLists(self, l: Optional[ListNode], r: Optional[ListNode]) -> Optional[ListNode]:
-        def merge(l,r):
-            if not l:
-                return r
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        def merge(l1,l2):
+            if not l1:
+                return l2
             
-            if not r:
-                return l
+            if not l2:
+                return l1
             
-            dummy = ListNode(-1001)
-            tmp = dummy
+            dummy = ListNode(float('inf'))
+            ptr = dummy
             
-            while l and r:
-                if l.val <= r.val:
-                    tmp.next = l
-                    l = l.next
-                    tmp = tmp.next
+            p1, p2 = l1,l2
+            
+            while p1 and p2:
+                if p1.val <= p2.val:
+                    ptr.next = p1
+                    p1 = p1.next
+                    ptr = ptr.next
                     
                 else:
-                    tmp.next = r
-                    r = r.next
-                    tmp = tmp.next
+                    ptr.next = p2
+                    p2 = p2.next
+                    ptr = ptr.next
                     
-            while l:
-                tmp.next = l
-                l = l.next
-                tmp = tmp.next
+            while p1:
+                ptr.next = p1
+                p1 = p1.next
+                ptr = ptr.next
                 
-            while r:
-                tmp.next = r
-                r = r.next
-                tmp = tmp.next
+            while p2:
+                ptr.next = p2
+                p2 = p2.next
+                ptr = ptr.next
                 
             return dummy.next
-            
-        return merge(l,r)
+        
+        return merge(list1, list2)
