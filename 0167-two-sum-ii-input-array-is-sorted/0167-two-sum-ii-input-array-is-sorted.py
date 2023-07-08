@@ -1,11 +1,17 @@
 class Solution:
-    def twoSum(self, numbers: List[int], target: int) -> List[int]:
-        mp = dict()
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        p1, p2 = 0, len(nums)-1
         
-        for i in range(len(numbers)):
-            if target-numbers[i] in mp:
-                return [mp[target-numbers[i]]+1, i+1]
+        while p1<len(nums) and p2 >= 0 and p1 < p2:
+            sm = nums[p1]+nums[p2]
             
-            mp[numbers[i]] = i
+            if sm == target:
+                return[p1+1, p2+1]
             
-        
+            if sm > target:
+                p2-=1
+                
+            if sm < target:
+                p1+=1
+                    
+            
