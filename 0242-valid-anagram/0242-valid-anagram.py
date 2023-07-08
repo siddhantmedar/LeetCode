@@ -17,6 +17,6 @@ class Solution:
             if mp[c] == 0:
                 del mp[c]
         
-        print(mp)
+        # print(mp)
         
         return True if not mp else False
