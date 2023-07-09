@@ -1,34 +1,37 @@
 class Solution:
-    def setZeroes(self, nums: List[List[int]]) -> None:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
         """
         Do not return anything, modify matrix in-place instead.
         """
-        M,N = len(nums), len(nums[0])
-        row, col = False, False
+        M,N = len(matrix), len(matrix[0])
         
-        for j in range(N):
-            if nums[0][j] == 0:
+        row = False
+        for ele in matrix[0]:
+            if ele == 0:
                 row = True
                 
+        col = False
         for i in range(M):
-            if nums[i][0] == 0:
+            if matrix[i][0] == 0:
                 col = True
+        
+        for i in range(1,M):
+            for j in range(1,N):
+                if matrix[i][j] == 0:
+                    matrix[0][j] = 0
+                    matrix[i][0] = 0
                 
         for i in range(1,M):
             for j in range(1,N):
-                if nums[i][j] == 0:
-                    nums[i][0] = 0
-                    nums[0][j] = 0
+                if matrix[0][j] == 0 or matrix[i][0] == 0:
+                    matrix[i][j] = 0
                     
-        for i in range(1,M):
-            for j in range(1,N):
-                if nums[i][0] == 0 or nums[0][j] == 0:
-                    nums[i][j] = 0
-        
         if row:
-            for j in range(N):
-                nums[0][j] = 0
-        
-        if col:
+            for i in range(N):
+                matrix[0][i] = 0
+                
+        if col:     
             for i in range(M):
-                nums[i][0] = 0
+                matrix[i][0] = 0
+                
+        
