@@ -9,18 +9,15 @@ class Solution:
         res = float("-inf")
         
         def dfs(root):
-            nonlocal res
-            
             if not root:
-                return 0
+                return 0,0
             
             left = dfs(root.left)
             right = dfs(root.right)
             
-            res = max(res, left+right)
+            up = max(left[0],right[0])+1
+            node = max(left[1], right[1], left[0]+right[0])
             
-            return max(left,right)+1
+            return (up,node)
         
-        dfs(root)
-        
-        return res
+        return dfs(root)[1]
