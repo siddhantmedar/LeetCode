@@ -6,23 +6,42 @@
 #         self.right = right
 class Solution:
     def mergeTrees(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> Optional[TreeNode]:
-        def dfs(r1, r2):
+        def bfs(r1, r2):
+            if not r1:
+                return r2
+            
+            if not r2:
+                return r1
+            
             if not r1 and not r2:
                 return r1
             
-            elif not r1 and r2:
-                return r2
+            q = deque([(r1,r2,None,0)])
             
-            elif r1 and not r2:
-                return r1
+            root = r1
             
-            else:
-                r1.val+=r2.val
+            while q:
+                n = len(q)
                 
-                r1.left = dfs(r1.left,r2.left)
-                r1.right = dfs(r1.right,r2.right)
-                
-                return r1
+                for _ in range(n):
+                    r1,r2,p,left = q.popleft()
+                    
+                    if not r1 and not r2:
+                        continue
+
+                    elif not r1 and r2:
+                        if left:
+                            p.left = r2
+                        else:
+                            p.right = r2
+
+                    elif r1 and r2:
+                        r1.val+=r2.val
+
+                        q.append((r1.left,r2.left,r1,1))
+                        q.append((r1.right,r2.right,r1,0))
+
+            return root
             
-        return dfs(root1,root2)
-            
+        
+        return bfs(root1,root2)
