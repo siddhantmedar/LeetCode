@@ -1,28 +1,9 @@
 class Solution:
-    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        mp = dict()
+    def topKFrequent(self, nums: List[int], K: int) -> List[int]:
+        mp = Counter(nums)
         
-        for ele in nums:
-            mp[ele] = 1 + mp.get(ele,0)
+        lst = [(k,v) for k,v in mp.items()]
         
-        container = [set() for _ in range(len(nums)+1)]
+        lst = sorted(mp.items(), key=lambda x:-x[1])[:K]
         
-        for key,val in mp.items():
-            container[val].add(key)
-        
-        i = len(container)-1
-        
-        res = []
-        
-        while i>=0:
-            if k==0:
-                break
-            
-            if container[i]:
-                for ele in container[i]:
-                    if k:
-                        k-=1
-                        res.append(ele)
-            i-=1
-        
-        return res
+        return [x[0] for x in lst]
