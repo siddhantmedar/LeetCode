@@ -1,21 +1,17 @@
 class Solution:
-    def isPalindrome(self, s: str) -> bool:
-        def pal(txt):
-            s,e = 0, len(txt)-1
-            
-            while s<=e:
-                if txt[s]!=txt[e]:
-                    return False
+    def isPalindrome(self, t: str) -> bool:
+        
+        t = [c.lower() for c in t if c.isalnum()]
+        
+        s,e = 0,len(t)-1
+
+        while s < e:
+            if t[s] == t[e]:
                 s+=1
                 e-=1
-                
-            return True
+            else:
+                return False
             
-            
-        txt = ""
+        return True
         
-        for c in s:
-            if c.isalnum():
-                txt+=c.lower()
-                
-        return pal(txt)
+        
