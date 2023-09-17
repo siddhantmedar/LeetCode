@@ -1,24 +1,28 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        low, high = 0, len(nums)-1
+        def bs(s,e):
+            if s>e:
+                return -1
+            
+            m = (s+e)>>1
+            
+            if nums[m] == target:
+                return m
+            
+            if nums[s] <= nums[m]:
+                if target >= nums[s] and target < nums[m]:
+                    return bs(s,m-1)
+                else:
+                    return bs(m+1,e)
+            
+            elif nums[m] <= nums[e]:
+                if target > nums[m] and target <= nums[e]:
+                    return bs(m+1,e)
+                else:
+                    return bs(s,m-1)
         
-        while low<=high:
-            mid = (low+high)>>1
-            
-            if nums[mid] == target:
-                return mid
-            
-            elif nums[low] <= nums[mid]:
-                if nums[low]<=target<nums[mid]:
-                    high = mid-1
-                else:
-                    low = mid+1
-            
-            elif nums[mid] <= nums[high]:
-                if nums[mid]<target<=nums[high]:
-                    low = mid+1
-                else:
-                    high = mid-1
-                    
-        return -1
-                    
+        result = bs(0,len(nums)-1) 
+        
+        print(result)
+        
+        return result if result!=None else -1
