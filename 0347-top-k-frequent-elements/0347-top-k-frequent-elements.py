@@ -2,8 +2,14 @@ class Solution:
     def topKFrequent(self, nums: List[int], K: int) -> List[int]:
         mp = Counter(nums)
         
-        lst = [(k,v) for k,v in mp.items()]
+        lst = [(-v,k) for k,v in mp.items()]
         
-        lst = sorted(mp.items(), key=lambda x:-x[1])[:K]
+        heapq.heapify(lst)
         
-        return [x[0] for x in lst]
+        result = []
+        
+        while K:
+            result.append(heapq.heappop(lst)[1])
+            K-=1
+            
+        return result
