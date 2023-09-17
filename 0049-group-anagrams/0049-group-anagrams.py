@@ -3,12 +3,10 @@ class Solution:
         mp = defaultdict(list)
         
         for word in strs:
-            key = [0]*26
-            
+            box = [0 for _ in range(26)]
             for c in word:
-                key[ord(c)-ord('a')]+=1
+                box[ord(c)-ord('a')]+=1
                 
-            mp[tuple(key)].append(word)
+            mp[tuple(box)].append(word)
             
-            
-        return [word_list for _, word_list in mp.items()]
+        return [v for v in mp.values()]
