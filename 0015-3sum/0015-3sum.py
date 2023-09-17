@@ -22,7 +22,7 @@ class Solution:
 
                 if sm==0 and (i!=l and l!=r and i!=r):
                     result.add((nums[i],nums[l],nums[r]))
-                    l+=1
+                    r-=1
 
                 elif sm < 0:
                     l+=1
