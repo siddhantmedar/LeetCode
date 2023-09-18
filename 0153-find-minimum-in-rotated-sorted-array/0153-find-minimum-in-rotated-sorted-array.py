@@ -1,22 +1,27 @@
 class Solution:
     def findMin(self, nums: List[int]) -> int:
-        result = nums[0]
         
-        low, high = 0, len(nums)-1
+        result = float("inf")
         
-        while low<=high:
-            if nums[low] < nums[high]:
-                result = min(result, nums[low])
-                break
-                
-            mid = (low+high)>>1
+        def bs(s,e):
+            nonlocal result
             
-            result = min(result, nums[mid])
+            if s>e:
+                return
             
-            if nums[low] <= nums[mid]:
-                low = mid+1
-                
+            if nums[s] < nums[e]:
+                result = min(result,nums[s])
+                return
+            
+            m=(s+e)>>1
+            
+            result = min(result,nums[m])
+            
+            if nums[s]<=nums[m]: # sorted part
+                return bs(m+1,e)
             else:
-                high = mid-1
-                
+                return bs(s,m-1)
+        
+        bs(0,len(nums)-1)
+        
         return result
