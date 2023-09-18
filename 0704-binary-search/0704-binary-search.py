@@ -1,19 +1,17 @@
 class Solution:
     def search(self, nums: List[int], target: int) -> int:
-        
-        def solve(s,e):
-            if s > e:
+        def bs(s,e):
+            if s>e:
                 return -1
             
-            mid = e+(s-e)//2
+            m=(s+e)>>1
             
-            if nums[mid]==target:
-                return mid
+            if nums[m]==target:
+                return m
             
-            elif nums[mid] > target:
-                return solve(s,mid-1)
-                
+            elif nums[m] > target:
+                return bs(s,m-1)
             else:
-                return solve(mid+1,e)
-        
-        return solve(0, len(nums)-1)
+                return bs(m+1,e)
+            
+        return bs(0,len(nums)-1)
