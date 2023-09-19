@@ -1,32 +1,32 @@
 class Solution:
-    def checkInclusion(self, s1: str, s2: str) -> bool:
-        if len(s1) > len(s2):
+    def checkInclusion(self, p: str, s: str) -> bool:
+        if len(p) > len(s):
             return False
         
-        ref = {}
+        mp = dict()
+        ref  = dict()
         
-        for c in s1:
-            ref[c] = 1+ref.get(c,0)
+        for c in p:
+            ref[c]=1+ref.get(c,0)
         
-        mp = {}
+        k = len(p)
+        i = 0
         
-        for i,c in enumerate(s2[:len(s1)]):
-            mp[c] = 1+mp.get(c,0)
+        for i in range(k):
+            mp[s[i]]=1+mp.get(s[i],0)
             
-        if ref == mp:
+        if ref==mp:
             return True
-        
-        i=0
-        for j,c in enumerate(s2[len(s1):]):
-            mp[s2[j-i]]-=1
             
-            if mp[s2[j-i]] == 0:
-                del mp[s2[j-i]]
+        for i in range(k,len(s)):
+            mp[s[i-k]]-=1
             
-            mp[c] = 1+mp.get(c,0)
+            if mp[s[i-k]]==0:
+                del mp[s[i-k]]
             
-            if mp == ref:
+            mp[s[i]]=1+mp.get(s[i],0)
+            
+            if mp==ref:
                 return True
-            
         
-        return False           
+        return False
