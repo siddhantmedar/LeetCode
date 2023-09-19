@@ -8,6 +8,6 @@ class Solution:
             if ele-buy>0:
                 profit = max(profit,ele-buy)
             else:
-                buy = min(buy,ele)
+                buy = ele
                 
         return profit
