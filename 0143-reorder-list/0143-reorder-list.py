@@ -11,59 +11,48 @@ class Solution:
         def merge(l,r):
             if not l:
                 return r
-            
             if not r:
                 return l
             
-            dummy = ListNode(-1)
-            tmp = dummy
+            dummy = ListNode(-1000)
+            ptr = dummy
             
             while l and r:
-                tmp.next = l
-                tmp = tmp.next
-                l = l.next
-                
-                tmp.next = r
-                tmp = tmp.next
-                r = r.next
-                
+                if l.val<=r.val:
+                    ptr.next = l
+                    l = l.next
+                    ptr = ptr.next
+                else:
+                    ptr.next = r
+                    r = r.next
+                    ptr = ptr.next
+            
             while l:
-                tmp.next = l
+                ptr.next = l
                 l = l.next
-                tmp = tmp.next
-                
+                ptr = ptr.next
+            
             while r:
-                tmp.next = r
+                ptr.next = r
                 r = r.next
-                tmp = tmp.next
+                ptr = ptr.next
                 
             return dummy.next
         
-        def reverse1(head):
-            pre, curr = None, head
-            
-            while curr:
-                ref = curr.next
-                curr.next = pre
-                
-                pre = curr
-                curr = ref
-                
-            return pre
         
-        def reverse2(head):
+        def reverse(head):
             if not head or not head.next:
                 return head
             
-            result = reverse2(head.next)
+            res = reverse(head.next)
             
             head.next.next = head
             head.next = None
             
-            return result
-            
-        def middle(head):
-            slow, fast = head, head
+            return res
+        
+        def mid(head):
+            slow, fast = head, head.next
             
             while fast and fast.next:
                 slow = slow.next
@@ -72,8 +61,50 @@ class Solution:
             return slow
         
         
-        mid = middle(head)
-        left, right = head, mid.next
-        mid.next = None
+        pre = mid(head)
         
-        return merge(left, reverse2(right))
+        rev = pre.next
+        head2 = pre.next
+        pre.next = None
+        
+        head1 = head
+        head2 = reverse(head2)
+        
+        dummy = ListNode(-1)
+        ptr = dummy
+        
+        while head1 and head2:
+            ptr.next = head1
+            head1 = head1.next
+            ptr = ptr.next
+            
+            ptr.next = head2
+            head2 = head2.next
+            ptr = ptr.next
+            
+        while head1 and head2:
+            ptr.next = head1
+            head1 = head1.next
+            ptr = ptr.next
+            
+            ptr.next = head2
+            head2 = head2.next
+            ptr = ptr.next
+        
+        while head1:
+            ptr.next = head1
+            head1 = head1.next
+            ptr = ptr.next
+            
+        while head2:
+            ptr.next = head2
+            head2 = head2.next
+            ptr = ptr.next
+            
+        while head and head.next:
+            head = head.next
+        
+        # head.next = reverse(rev)
+        
+        return dummy.next
+        
