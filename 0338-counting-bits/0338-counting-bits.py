@@ -1,17 +1,20 @@
 class Solution:
     def countBits(self, n: int) -> List[int]:
-        def util(n):
+        def count(n):
             cnt = 0
-
-            while(n):
+            
+            while n:
                 cnt+=(n&1)
                 n>>=1
-
+                
             return cnt
         
-        res = []
+        
+        result = []
+        
         
         for i in range(n+1):
-            res.append(util(i))
+            result.append(count(i))
             
-        return res
+        return result
+        
