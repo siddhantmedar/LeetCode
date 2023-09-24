@@ -1,27 +1,24 @@
 class Solution:
     def killProcess(self, pid: List[int], ppid: List[int], kill: int) -> List[int]:
-        def buildPath(mp,node):
-            if not mp[node]:
-                return set([node])
-            ans = set()
-            ans.add(node)
+        def solve(node):
+            nonlocal result
             
-            for ele in mp[node]:
-                ans.update(buildPath(mp,ele))
+            if node not in mp:
+                return
             
-            return ans
-        
+            for nei in mp[node]:
+                result.append(nei)
+                
+                solve(nei)
+            
         
         mp = defaultdict(set)
         
-        for i in range(len(pid)):
-            if ppid[i] == 0:
-                continue
+        for child,parent in zip(pid,ppid):
+            mp[parent].add(child)
             
-            mp[ppid[i]].add(pid[i])
-            
-        result = list(buildPath(mp,kill))
+        result = []
         
-        print(result)
+        solve(kill)
         
-        return result
+        return [kill]+result
