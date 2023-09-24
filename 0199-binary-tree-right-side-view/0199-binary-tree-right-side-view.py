@@ -6,18 +6,20 @@
 #         self.right = right
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
-        mp = {}
+        if not root:
+            return
         
-        def dfs(root,l):
+        mp = defaultdict()
+        
+        def dfs(root,level):
             if not root:
-                return
+                return 
             
-            mp[l] = mp.get(l, root.val)
-            mp[l] = root.val
+            mp[level] = root.val
             
-            dfs(root.left,l+1)
-            dfs(root.right,l+1)
-            
+            dfs(root.left,level+1)
+            dfs(root.right,level+1)
+        
         dfs(root,1)
         
-        return [v for _,v in mp.items()]
+        return [v for v in mp.values()]
