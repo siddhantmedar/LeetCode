@@ -33,16 +33,6 @@ class Solution:
                 if len(s) == mx:
                     mx = len(s)
                     result = min(s,result)
-                
-            print(s)
-#             if len(result) >= len(s):
-#                 if len(result) > len(s):
-#                     print(result,s)
-#                     result = s
-            
-#                 if len(result) == len(s):
-#                     print("min of ", result,s,min(result,s))
-#                     result = min(result,s)
             
             for child in root.children:
                 if s+root.children[child].val in st:
@@ -53,7 +43,5 @@ class Solution:
         root = TrieNode().insertWords(words)
         result, mx = None, float("-inf")
         solve(root,"")
-        
-        print(result)
-        
+
         return result
