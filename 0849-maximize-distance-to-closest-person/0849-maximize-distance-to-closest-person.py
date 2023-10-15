@@ -1,32 +1,25 @@
 class Solution:
     def maxDistToClosest(self, seats: List[int]) -> int:
-        st = []
+        st = None
         
         left,right = [], []
         
         for i,ele in enumerate(seats):
             if ele == 0:
-                if not st:
-                    left.append(float("inf"))
-                else:
-                    left.append(abs(st[-1]-i))
+                left.append(float("inf") if st == None else abs(st-i))
             else:
-                st.append(i)
+                st = i
                 left.append(float("inf"))
                 
-        st.clear()
+        st = None
         
         for i,ele in reversed(list(enumerate(seats))):
             if ele == 0:
-                if not st:
-                    right.append(float("inf"))
-                else:
-                    right.append(abs(st[-1]-i))
+                right.append(float("inf") if st == None else abs(st-i))
             else:
-                st.append(i)
+                st = i
                 right.append(float("inf"))
-        
-        
+             
         res = float("-inf")
         
         for a,b in zip(left,right[::-1]):
