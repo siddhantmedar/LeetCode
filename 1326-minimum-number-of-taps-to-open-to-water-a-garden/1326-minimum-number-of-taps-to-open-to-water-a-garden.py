@@ -3,8 +3,6 @@ class Solution:
         cnt = 0
         mn, mx = 0, 0
         
-        # print([[i-ranges[i],i+ranges[i]] for i in range(len(ranges))])
-        
         while mn < n:
             changed = False
             
@@ -15,7 +13,6 @@ class Solution:
                     changed = True
                     mx = end
             
-            # print(mn, mx)
             if mn == mx:
                 return -1
             
@@ -24,5 +21,4 @@ class Solution:
             if changed:
                 cnt+=1
 
-        # print(cnt)
         return cnt if cnt > 0 else -1
