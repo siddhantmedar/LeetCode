@@ -7,25 +7,20 @@
 class Solution:
     def generateTrees(self, n: int) -> List[Optional[TreeNode]]:
         def solve(start,end):
-            result = []
+            res = []
             
             if start > end:
-                result.append(None)
-                return result
+                return [None]
             
-            for i in range(start, end+1):
-                # i becomes the root
-                left = solve(start,i-1) # will have all combs of left sub tree
-                right = solve(i+1,end) # will have all combs of right sub tree
-            
-                print(f"for node {i}, the left and right are {left} and {right}")
+            for i in range(start,end+1):
+                left = solve(start,i-1)
+                right = solve(i+1,end)
+                
                 for l in left:
                     for r in right:
-                        print(l,r)
                         root = TreeNode(i,l,r)
-                        result.append(root)
-
-            return result
-
-
+                        res.append(root)
+                        
+            return res
+        
         return solve(1,n)
